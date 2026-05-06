@@ -1,0 +1,43 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { siteContent } from "@/config/siteContent";
+import { ViewerCounter } from "@/components/ui/ViewerCounter";
+
+/**
+ * モバイル下部に常駐する予約CTA。
+ * 一定スクロール後に表示。
+ */
+export function StickyReserveCTA() {
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => setVisible(window.scrollY > 600);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
+    return (
+        <div
+            className={[
+                "fixed bottom-0 left-0 right-0 z-30 md:hidden transition-all duration-500",
+                visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
+            ].join(" ")}
+        >
+            <div className="px-4 pb-4 pt-3 bg-gradient-to-t from-[#1a1310] via-[#1a1310]/95 to-transparent">
+                <div className="text-center mb-2">
+                    <ViewerCounter className="text-[#d8cfc1]" />
+                </div>
+                <Link
+                    href={siteContent.booking.url}
+                    className="block w-full text-center py-4 bg-[#f5efe6] text-[#1a1310] text-sm tracking-[0.25em]"
+                    style={{ fontFamily: "var(--font-inter)" }}
+                >
+                    {siteContent.booking.labelLong.toUpperCase()}
+                </Link>
+            </div>
+        </div>
+    );
+}

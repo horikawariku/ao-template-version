@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* カラー — AO 焼杉系ダークパレット */
+  --color-bg: #1a1310;          /* 焼杉ベース */
+  --color-bg-alt: #221915;      /* セクション交互用 */
+  --color-bg-elev: #2a1f1a;     /* 浮かせる要素 */
+  --color-ink: #f5efe6;         /* メイン文字 (温かい白) */
+  --color-ink-soft: #d8cfc1;    /* 本文 */
+  --color-ink-mute: #9c9085;    /* 補助 */
+  --color-mute: #9c9085;        /* (legacy) 互換用 */
+  --color-line: #3a2e26;
+  --color-line-strong: #4a3a2f;
+  --color-accent: #3E2820;      /* AOブランド焼杉 */
+  --color-accent-hi: #6b4a37;   /* ホバーやハイライト */
+  /* 写真にかぶせるオーバーレイ用 (深い夜) */
+  --color-night: #0c0805;
+
+  /* フォント */
+  --font-display: var(--font-inter), serif;          /* 巨大英字 (CONCEPT, GALLERY 等) */
+  --font-mincho: var(--font-noto-serif-jp), serif;   /* 和文セリフ */
+  --font-sans: var(--font-noto-sans-jp), sans-serif; /* 本文 */
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--color-bg);
+    color: var(--color-ink-soft);
+  }
+  ::-webkit-scrollbar { width: 0; height: 0; }
+}
+
+/* スクロールバー非表示 (横スクロール領域用) */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* fade-in (IntersectionObserver駆動) */
+.fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
