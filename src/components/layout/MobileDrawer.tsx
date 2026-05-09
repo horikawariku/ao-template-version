@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { X, Instagram, MessageCircle } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { siteContent } from "@/config/siteContent";
+import { BookingLink } from "@/components/ui/BookingLink";
 
 interface Props {
     open: boolean;
@@ -117,14 +118,14 @@ export function MobileDrawer({ open, onClose }: Props) {
                                     </a>
                                 )}
                             </div>
-                            <Link
-                                href={siteContent.booking.url}
+                            <BookingLink
+                                baseUrl={siteContent.booking.url}
                                 onClick={onClose}
                                 className="text-[11px] tracking-[0.25em] text-[#f5efe6] border border-[#f5efe6] px-5 py-3 hover:bg-[#f5efe6] hover:text-[#1a1310] transition"
                                 style={{ fontFamily: "var(--font-inter)" }}
                             >
                                 RESERVATION
-                            </Link>
+                            </BookingLink>
                         </div>
                     </motion.aside>
                 </>

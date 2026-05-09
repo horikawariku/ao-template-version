@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { siteContent } from "@/config/siteContent";
 import { ViewerCounter } from "@/components/ui/ViewerCounter";
+import { BookingLink } from "@/components/ui/BookingLink";
 
 /**
  * モバイル下部に常駐する予約CTA。
@@ -30,13 +30,13 @@ export function StickyReserveCTA() {
                 <div className="text-center mb-2">
                     <ViewerCounter className="text-[#d8cfc1]" />
                 </div>
-                <Link
-                    href={siteContent.booking.url}
+                <BookingLink
+                    baseUrl={siteContent.booking.url}
                     className="block w-full text-center py-4 bg-[#f5efe6] text-[#1a1310] text-sm tracking-[0.25em]"
                     style={{ fontFamily: "var(--font-inter)" }}
                 >
                     {siteContent.booking.labelLong.toUpperCase()}
-                </Link>
+                </BookingLink>
             </div>
         </div>
     );

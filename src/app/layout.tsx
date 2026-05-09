@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Footer } from "@/components/layout/Footer";
 import { StickyReserveCTA } from "@/components/layout/StickyReserveCTA";
+import { ShareButton } from "@/components/ui/ShareButton";
+import { UtmCapture } from "@/components/UtmCapture";
 import { siteContent } from "@/config/siteContent";
 import "./globals.css";
 
@@ -14,6 +17,9 @@ export const metadata: Metadata = {
     title: { default: siteContent.site.name, template: `%s | ${siteContent.site.name}` },
     description: siteContent.site.description,
     metadataBase: new URL(siteContent.site.url),
+    other: {
+        "rt-property": siteContent.tracker.propertyId,
+    },
     openGraph: {
         title: siteContent.site.name,
         description: siteContent.site.description,
@@ -38,10 +44,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 className={`${inter.variable} ${notoSerifJp.variable} ${notoSansJp.variable} antialiased bg-bg text-ink-soft`}
                 style={{ fontFamily: "var(--font-noto-sans-jp), sans-serif" }}
             >
+                <UtmCapture />
                 <SiteHeader />
                 {children}
                 <Footer />
                 <StickyReserveCTA />
+                <ShareButton />
+                <Script
+                    src={`${siteContent.tracker.origin}/api/site-tracker-js`}
+                    strategy="afterInteractive"
+                />
             </body>
         </html>
     );

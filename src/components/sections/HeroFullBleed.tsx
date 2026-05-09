@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { siteContent } from "@/config/siteContent";
 import { ViewerCounter } from "@/components/ui/ViewerCounter";
+import { BookingLink } from "@/components/ui/BookingLink";
 
 /**
  * フルブリードのヒーロー。
@@ -65,13 +65,13 @@ export function HeroFullBleed() {
                 </p>
 
                 {/* CTA Pill */}
-                <Link
-                    href={siteContent.booking.url}
+                <BookingLink
+                    baseUrl={siteContent.booking.url}
                     className="mt-12 md:mt-16 inline-flex items-center gap-3 px-8 md:px-10 py-4 rounded-full border border-white/70 text-white text-[11px] md:text-xs tracking-[0.3em] hover:bg-white hover:text-[#1a1310] transition"
                     style={{ fontFamily: "var(--font-inter)" }}
                 >
                     {siteContent.hero.ctaLabel}
-                </Link>
+                </BookingLink>
 
                 {/* Viewer counter */}
                 <div className="mt-5">

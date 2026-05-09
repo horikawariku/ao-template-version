@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { siteContent } from "@/config/siteContent";
 import { useFadeIn } from "@/lib/useFadeIn";
+import { BookingLink } from "@/components/ui/BookingLink";
 
 /**
  * 中央配置の予約バナー。
@@ -15,9 +15,9 @@ export function ReservationBanner() {
 
     return (
         <section className="relative">
-            <Link
+            <BookingLink
                 ref={ref}
-                href={booking.url}
+                baseUrl={booking.url}
                 className="fade-in relative block w-full h-[60vh] min-h-[420px] overflow-hidden group"
             >
                 <Image
@@ -55,7 +55,7 @@ export function ReservationBanner() {
                         {booking.labelLong.toUpperCase()}
                     </span>
                 </div>
-            </Link>
+            </BookingLink>
         </section>
     );
 }

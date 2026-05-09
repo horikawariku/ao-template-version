@@ -1,7 +1,7 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { siteContent } from "@/config/siteContent";
 import { PageHero } from "@/components/ui/PageHero";
+import { BookingLink } from "@/components/ui/BookingLink";
 
 export const metadata: Metadata = { title: "ご予約" };
 
@@ -22,13 +22,13 @@ export default function ReservationPage() {
                     </p>
 
                     <div className="mt-12 flex justify-center">
-                        <Link
-                            href={booking.url}
+                        <BookingLink
+                            baseUrl={reservation.engineUrl ?? booking.url}
                             className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-[#f5efe6] text-[#1a1310] text-[11px] md:text-xs tracking-[0.3em] hover:bg-[#3E2820] hover:text-[#f5efe6] transition"
                             style={{ fontFamily: "var(--font-inter)" }}
                         >
                             {reservation.engineLabel.toUpperCase()}
-                        </Link>
+                        </BookingLink>
                     </div>
 
                     <ul className="mt-16 border-t border-[#4a3a2f]">
