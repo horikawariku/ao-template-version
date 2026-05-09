@@ -1,32 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Share2 } from "lucide-react";
-import { siteContent } from "@/config/siteContent";
-import { readUtmCookie, UTM_KEYS_LIST } from "@/lib/useUtmPersist";
+import { Share2, Check } from "lucide-react";
 
 /**
- * 左下フローティングの LINE共有ボタン (アイコンのみ・小)。
- * スクロール400px以上で表示。共有URLには現在のUTMを継承し `via=line_share` を付与。
+ * 左下フローティングの共有ボタン (アイコンのみ・小)。
+ * クリック時に現在のURLをクリップボードへコピー。
+ * UTMはURLバーに保持されてるのでコピーURLにもそのまま引き継がれる。
  *
- * モバイル: stickyCTAの上に配置 (bottom-[88px])
+ * モバイル: stickyCTAの上 (bottom-[88px] left-4)
  * デスクトップ: 左下角 (bottom-6 left-6)
+ * 表示条件: スクロール400px以上
  */
 export function ShareButton() {
-    const [shareUrl, setShareUrl] = useState<string>(siteContent.site.url);
     const [visible, setVisible] = useState(false);
-
-    useEffect(() => {
-        if (typeof window === "undefined") return;
-        const url = new URL(siteContent.site.url);
-        const utm = readUtmCookie();
-        UTM_KEYS_LIST.forEach((k) => {
-            const v = utm[k];
-            if (v) url.searchParams.set(k, v);
-        });
-        url.searchParams.set("via", "line_share");
-        setShareUrl(url.toString());
-    }, []);
+    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         const onScroll = () => setVisible(window.scrollY > 400);
@@ -35,15 +23,22 @@ export function ShareButton() {
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    const text = `${siteContent.site.name}\n${siteContent.hero.wordmarkJp}`;
-    const lineHref = `https://line.me/R/msg/text/?${encodeURIComponent(`${text}\n${shareUrl}`)}`;
+    const handleCopy = async () => {
+        if (typeof window === "undefined") return;
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch {
+            /* clipboard API unavailable (insecure context等) — silent fail */
+        }
+    };
 
     return (
-        <a
-            href={lineHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LINEで送る"
+        <button
+            type="button"
+            onClick={handleCopy}
+            aria-label={copied ? "コピーしました" : "リンクをコピー"}
             className={[
                 "fixed left-4 md:left-6 bottom-[88px] md:bottom-6 z-30",
                 "w-11 h-11 rounded-full flex items-center justify-center",
@@ -54,7 +49,15 @@ export function ShareButton() {
                     : "opacity-0 translate-y-4 pointer-events-none",
             ].join(" ")}
         >
-            <Share2 size={18} strokeWidth={1.5} />
-        </a>
+            {copied ? <Check size={18} strokeWidth={2} /> : <Share2 size={18} strokeWidth={1.5} />}
+            {copied && (
+                <span
+                    className="absolute left-full ml-3 whitespace-nowrap text-[10px] tracking-[0.2em] text-[#f5efe6] bg-[#1f1610] border border-[#4a3a2f] px-2 py-1 rounded"
+                    style={{ fontFamily: "var(--font-inter)" }}
+                >
+                    COPIED
+                </span>
+            )}
+        </button>
     );
 }
