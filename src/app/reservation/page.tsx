@@ -24,7 +24,7 @@ export default function ReservationPage() {
                     <div className="mt-12 flex justify-center">
                         <BookingLink
                             baseUrl={reservation.engineUrl ?? booking.url}
-                            className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-[#f5efe6] text-[#1a1310] text-[11px] md:text-xs tracking-[0.3em] hover:bg-[#3E2820] hover:text-[#f5efe6] transition"
+                            className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-[#f5efe6] text-[#1a1310] text-[11px] md:text-xs tracking-[0.3em] font-bold hover:bg-[#3E2820] hover:text-[#f5efe6] transition"
                             style={{ fontFamily: "var(--font-inter)" }}
                         >
                             {reservation.engineLabel.toUpperCase()}

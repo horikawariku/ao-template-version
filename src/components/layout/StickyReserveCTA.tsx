@@ -32,7 +32,7 @@ export function StickyReserveCTA() {
                 </div>
                 <BookingLink
                     baseUrl={siteContent.booking.url}
-                    className="block w-full text-center py-4 bg-[#f5efe6] text-[#1a1310] text-sm tracking-[0.25em]"
+                    className="block w-full text-center py-4 bg-[#f5efe6] text-[#1a1310] text-sm tracking-[0.25em] font-bold"
                     style={{ fontFamily: "var(--font-inter)" }}
                 >
                     {siteContent.booking.labelLong.toUpperCase()}

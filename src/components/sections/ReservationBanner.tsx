@@ -49,7 +49,7 @@ export function ReservationBanner() {
                     </p>
 
                     <span
-                        className="mt-10 inline-flex items-center gap-3 px-9 py-4 rounded-full border border-white/70 text-white text-[11px] md:text-xs tracking-[0.3em] group-hover:bg-white group-hover:text-[#f5efe6] transition"
+                        className="mt-10 inline-flex items-center gap-3 px-9 py-4 rounded-full border border-white/70 text-white text-[11px] md:text-xs tracking-[0.3em] font-bold group-hover:bg-white group-hover:text-[#f5efe6] transition"
                         style={{ fontFamily: "var(--font-inter)" }}
                     >
                         {booking.labelLong.toUpperCase()}
