@@ -32,17 +32,19 @@ export function StickyReserveCTA() {
                 </div>
                 <BookingLink
                     baseUrl={siteContent.booking.url}
-                    className="flex w-full items-center justify-between gap-3 py-4 px-5 bg-[#f5efe6] text-[#1a1310] font-bold"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    className="group flex w-full items-center justify-between gap-3 py-4 px-5 rounded-full bg-white text-[#1a1310] font-bold transition-all duration-300"
+                    style={{
+                        fontFamily: "var(--font-inter)",
+                        boxShadow: "0 8px 28px -4px rgba(0,0,0,0.45), 0 2px 8px -2px rgba(0,0,0,0.25)",
+                    }}
                 >
-                    <span
-                        className="text-base tracking-[0.04em]"
-                        style={{ fontVariantNumeric: "tabular-nums" }}
-                    >
-                        ¥9,800<span className="text-[11px] ml-0.5">〜/人</span>
+                    <span className="flex items-baseline gap-1" style={{ fontVariantNumeric: "tabular-nums" }}>
+                        <span className="text-lg tracking-[0.02em]">¥9,800</span>
+                        <span className="text-[10px] tracking-[0.04em] text-[#1a1310]/65">〜/人</span>
                     </span>
-                    <span className="text-sm tracking-[0.25em]">
+                    <span className="flex items-center gap-2 text-[12px] tracking-[0.22em]">
                         空室確認
+                        <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </span>
                 </BookingLink>
             </div>

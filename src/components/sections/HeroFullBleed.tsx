@@ -64,13 +64,22 @@ export function HeroFullBleed() {
                     {siteContent.hero.wordmarkJp}
                 </p>
 
-                {/* CTA Pill */}
+                {/* CTA Pill — premium float style */}
                 <BookingLink
                     baseUrl={siteContent.booking.url}
-                    className="mt-12 md:mt-16 inline-flex items-center gap-3 px-8 md:px-10 py-4 rounded-full bg-white text-[#1a1310] text-[11px] md:text-xs tracking-[0.3em] font-bold hover:opacity-90 transition"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    className="group mt-12 md:mt-16 inline-flex items-center gap-3 px-10 md:px-14 py-4 md:py-5 rounded-full bg-white text-[#1a1310] text-[12px] md:text-[13px] tracking-[0.28em] font-bold transition-all duration-500 ease-out hover:-translate-y-1"
+                    style={{
+                        fontFamily: "var(--font-inter)",
+                        boxShadow: "0 12px 40px -8px rgba(0,0,0,0.35), 0 4px 12px -2px rgba(0,0,0,0.18)",
+                    }}
                 >
-                    {siteContent.hero.ctaLabel}
+                    <span>{siteContent.hero.ctaLabel}</span>
+                    <span
+                        aria-hidden
+                        className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-1"
+                    >
+                        →
+                    </span>
                 </BookingLink>
 
                 {/* Viewer counter */}
