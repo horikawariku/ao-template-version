@@ -8,6 +8,7 @@
 const IMG = {
     // Hero
     heroSauna: "https://i.imgur.com/5fv3XpV.png",
+    heroSaunaNew: "https://i.imgur.com/CRnuIbf.png",
     heroExterior: "https://i.imgur.com/t0ktKAJ.png",
     heroSaunaWinter: "https://i.imgur.com/KWeVpXq.png",
 
@@ -97,7 +98,7 @@ export const siteContent = {
         wordmarkEn: "VILLA AO",
         wordmarkJp: "サウナで映画も楽しめる、貸切ヴィラ",
         subtitle: "Sauna Private Villa — Takashima",
-        images: [IMG.heroSauna, IMG.heroExterior, IMG.heroSaunaWinter],
+        images: [IMG.heroSaunaNew, IMG.heroExterior, IMG.heroSaunaWinter],
         ctaLabel: "空きカレンダーを見る",
     },
 
