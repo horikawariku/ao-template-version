@@ -45,12 +45,6 @@ export function HeroFullBleed() {
 
             {/* Center wordmark */}
             <div className="relative h-full flex flex-col items-center justify-center px-5 text-center">
-                <p
-                    className="text-[10px] md:text-[11px] tracking-[0.5em] text-white/80 mb-6"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                >
-                    {siteContent.hero.subtitle.toUpperCase()}
-                </p>
                 <h1
                     className="text-white font-light text-[34px] md:text-[68px] lg:text-[88px] leading-[1.1] tracking-[0.12em]"
                     style={{ fontFamily: "var(--font-noto-serif-jp)" }}
@@ -58,7 +52,7 @@ export function HeroFullBleed() {
                     {siteContent.site.name}
                 </h1>
                 <p
-                    className="mt-6 text-white/85 text-[13px] md:text-[15px] tracking-[0.3em]"
+                    className="mt-6 text-white/85 text-[11px] md:text-[13px] tracking-[0.3em]"
                     style={{ fontFamily: "var(--font-noto-serif-jp)" }}
                 >
                     {siteContent.hero.wordmarkJp}
