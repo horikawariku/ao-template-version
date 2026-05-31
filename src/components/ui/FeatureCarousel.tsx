@@ -65,7 +65,7 @@ export function FeatureCarousel({
         <div className="relative">
             <div
                 ref={scrollerRef}
-                className="no-scrollbar flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-2 -mx-5 md:-mx-10 px-5 md:px-10"
+                className="no-scrollbar flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-2"
             >
                 {items.map((item, i) => (
                     <article
@@ -80,14 +80,6 @@ export function FeatureCarousel({
                                 sizes="(max-width: 768px) 80vw, 400px"
                                 className="object-cover"
                             />
-                            {item.badge && (
-                                <span
-                                    className="absolute top-3 left-3 text-[10px] tracking-[0.2em] bg-white/90 text-[#f5efe6] px-3 py-1.5"
-                                    style={{ fontFamily: "var(--font-inter)" }}
-                                >
-                                    {item.badge}
-                                </span>
-                            )}
                         </div>
                         <div className="mt-4">
                             <div className="flex items-baseline justify-between gap-3">
@@ -109,6 +101,14 @@ export function FeatureCarousel({
                                     style={{ fontFamily: "var(--font-inter)" }}
                                 >
                                     {item.titleEn.toUpperCase()}
+                                </p>
+                            )}
+                            {item.badge && (
+                                <p
+                                    className="mt-2 text-[13px] tracking-[0.05em] text-[#f5efe6] font-medium"
+                                    style={{ fontFamily: "var(--font-inter)", fontVariantNumeric: "tabular-nums" }}
+                                >
+                                    {item.badge}
                                 </p>
                             )}
                             {item.desc && (

@@ -32,10 +32,18 @@ export function StickyReserveCTA() {
                 </div>
                 <BookingLink
                     baseUrl={siteContent.booking.url}
-                    className="block w-full text-center py-4 bg-[#f5efe6] text-[#1a1310] text-sm tracking-[0.25em] font-bold"
+                    className="flex w-full items-center justify-between gap-3 py-4 px-5 bg-[#f5efe6] text-[#1a1310] font-bold"
                     style={{ fontFamily: "var(--font-inter)" }}
                 >
-                    {siteContent.booking.labelLong.toUpperCase()}
+                    <span
+                        className="text-base tracking-[0.04em]"
+                        style={{ fontVariantNumeric: "tabular-nums" }}
+                    >
+                        ¥9,800<span className="text-[11px] ml-0.5">〜/人</span>
+                    </span>
+                    <span className="text-sm tracking-[0.25em]">
+                        空室確認
+                    </span>
                 </BookingLink>
             </div>
         </div>
