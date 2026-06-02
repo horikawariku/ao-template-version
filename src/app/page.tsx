@@ -8,10 +8,12 @@ import { Nearby } from "@/components/sections/Nearby";
 import { ReservationBanner } from "@/components/sections/ReservationBanner";
 import { TrioTiles } from "@/components/sections/TrioTiles";
 import { FaqSection } from "@/components/sections/FaqSection";
+import { WelcomePopup } from "@/components/ui/WelcomePopup";
 
 export default function Home() {
     return (
         <main>
+            <WelcomePopup />
             <HeroFullBleed />
             <Gallery />
             <Facilities />
