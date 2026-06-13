@@ -51,11 +51,13 @@ export function useUtmPersist() {
         if (typeof window === "undefined") return;
         try {
             const url = new URL(window.location.href);
-            const urlUtm: UtmRecord = {};
+            const urlUtm: Record<string, string> = {};
             UTM_KEYS.forEach((k) => {
                 const v = url.searchParams.get(k);
                 if (v) urlUtm[k] = v;
             });
+            const fbclid = url.searchParams.get("fbclid");
+            if (fbclid) urlUtm.fbclid = fbclid; // Meta広告クリックID
             if (Object.keys(urlUtm).length > 0) {
                 const existing = readUtmCookie();
                 writeUtmCookie({ ...existing, ...urlUtm });
@@ -71,16 +73,22 @@ export function getStoredUtmSource(): string | null {
     return readUtmCookie().utm_source ?? null;
 }
 
+/** 保管された fbclid (Meta広告クリックID) を取得 (なければ null) */
+export function getStoredFbclid(): string | null {
+    return (readUtmCookie() as Record<string, string>).fbclid ?? null;
+}
+
 /**
- * redirect-tracker の base URL に、保管UTMを反映した URL を返す。
- * 保管なしの場合は base そのまま。
+ * redirect-tracker の base URL に、保管UTM(source)と fbclid を反映した URL を返す。
+ * fbclid を引き継ぐことで、予約確定時に CAPI で Meta に Purchase を紐付けられる。
  */
 export function buildBookingUrl(baseUrl: string): string {
-    const stored = getStoredUtmSource();
-    if (!stored) return baseUrl;
     try {
         const url = new URL(baseUrl);
-        url.searchParams.set("s", stored);
+        const stored = getStoredUtmSource();
+        if (stored) url.searchParams.set("s", stored);
+        const fb = getStoredFbclid();
+        if (fb) url.searchParams.set("fbclid", fb);
         return url.toString();
     } catch {
         return baseUrl;
