@@ -36,6 +36,8 @@
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
-/* fade-in (IntersectionObserver駆動) */
-.fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.9s ease, transform 0.9s ease; }
+/* fade-in (IntersectionObserver駆動)
+   opacity は 0 にしない (高速スクロール・低速端末で「真っ暗な画面」が出て
+   ページが終わったと誤認され離脱するため)。うっすら見えた状態から素早く立ち上げる。 */
+.fade-in { opacity: 0.35; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }

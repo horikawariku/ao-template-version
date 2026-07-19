@@ -22,7 +22,9 @@ export function useFadeIn<T extends HTMLElement = HTMLElement>(options?: Interse
                     }
                 });
             },
-            { rootMargin: "0px 0px -10% 0px", threshold: 0.1, ...options },
+            // 発火を早める: 画面下端に触れた瞬間に開始 (旧: -10%マージン+10%表示で
+            // 高速スクロール時に未発火のセクションが暗いまま残る問題があった)
+            { rootMargin: "0px 0px 0px 0px", threshold: 0.01, ...options },
         );
 
         io.observe(node);
