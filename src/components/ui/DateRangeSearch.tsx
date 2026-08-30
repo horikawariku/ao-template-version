@@ -24,13 +24,11 @@ function fmtShort(s: string): string {
 }
 
 interface Props {
-    /** カレンダーをバーの上に開く (固定フッター用) */
-    dropUp?: boolean;
     /** CTA計測用の識別子 */
     ctaId: string;
 }
 
-export function DateRangeSearch({ dropUp = false, ctaId }: Props) {
+export function DateRangeSearch({ ctaId }: Props) {
     const [open, setOpen] = useState(false);
     const todayStr = useMemo(() => ymd(new Date()), []);
     const [viewMonth, setViewMonth] = useState(() => {
@@ -80,9 +78,12 @@ export function DateRangeSearch({ dropUp = false, ctaId }: Props) {
     }, [viewMonth]);
 
     const calendar = (
+        <>
+        {/* 背景 (タップで閉じる)。overflow-hidden な祖先に刈られないよう fixed で描画 */}
+        <div className="fixed inset-0 z-[60] bg-black/45" onClick={() => setOpen(false)} />
         <div
-            className={"absolute left-0 right-0 z-50 rounded-[20px] bg-[#f3ece1] text-[#212227] p-4 " + (dropUp ? "bottom-full mb-2" : "top-full mt-2")}
-            style={{ boxShadow: "0 12px 34px rgba(20,16,12,0.28)", fontFamily: "var(--font-inter)" }}
+            className="fixed z-[70] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[calc(100%-32px)] max-w-[440px] rounded-[20px] bg-[#f3ece1] text-[#212227] p-4"
+            style={{ boxShadow: "0 12px 34px rgba(20,16,12,0.35)", fontFamily: "var(--font-inter)" }}
         >
             <div className="flex items-center justify-between mb-2">
                 <button type="button" onClick={() => canPrev && moveMonth(-1)}
@@ -136,6 +137,7 @@ export function DateRangeSearch({ dropUp = false, ctaId }: Props) {
                 <button type="button" onClick={() => setOpen(false)} className="text-[11px] text-[#5b5c50] px-2 py-1">閉じる</button>
             </div>
         </div>
+        </>
     );
 
     return (

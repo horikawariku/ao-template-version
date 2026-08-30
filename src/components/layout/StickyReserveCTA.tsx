@@ -30,7 +30,7 @@ export function StickyReserveCTA() {
                     <ViewerCounter className="text-[#d8cfc1]" />
                 </div>
                 <div className="flex justify-center">
-                    <DateRangeSearch ctaId="sticky" dropUp />
+                    <DateRangeSearch ctaId="sticky" />
                 </div>
             </div>
         </div>
