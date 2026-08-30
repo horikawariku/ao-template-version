@@ -69,10 +69,7 @@ export function ConceptSenses() {
                                     >
                                         {f.title}
                                     </h3>
-                                    <p
-                                        className="mt-3 text-[12px] md:text-[13px] leading-[1.85] text-[#d8cfc1] flex-1"
-                                        style={{ fontFamily: "var(--font-noto-serif-jp)" }}
-                                    >
+                                    <p className="mt-3 text-[12px] md:text-[13px] leading-[1.85] text-[#d8cfc1] flex-1">
                                         {f.body}
                                     </p>
                                     {f.badges.length > 0 && (

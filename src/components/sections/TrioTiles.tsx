@@ -36,10 +36,7 @@ export function TrioTiles() {
                                     >
                                         {tile.en}
                                     </h3>
-                                    <p
-                                        className="mt-2 text-[11px] md:text-[12px] tracking-[0.3em] text-white/80"
-                                        style={{ fontFamily: "var(--font-noto-serif-jp)" }}
-                                    >
+                                    <p className="mt-2 text-[11px] md:text-[12px] tracking-[0.15em] text-white/80">
                                         {tile.jp}
                                     </p>
                                 </div>

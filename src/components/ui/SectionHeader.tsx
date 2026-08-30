@@ -46,7 +46,6 @@ export function SectionHeader({ index, en, jp, lead, align = "left" }: Props) {
                         "mt-6 max-w-2xl text-[13px] md:text-[14px] leading-[2] text-[#d8cfc1]",
                         align === "center" ? "mx-auto" : "",
                     ].join(" ")}
-                    style={{ fontFamily: "var(--font-noto-serif-jp)" }}
                 >
                     {lead}
                 </p>

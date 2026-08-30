@@ -152,6 +152,7 @@ export const siteContent = {
             {
                 en: "Private Sauna",
                 jp: "貸切サウナ",
+                stat: "100℃",
                 note: "最高100℃調整可・セルフロウリュ・YouTube視聴可",
                 image: IMG.gSauna2,
                 detail:
@@ -160,6 +161,7 @@ export const siteContent = {
             {
                 en: "Cold Bath",
                 jp: "水風呂",
+                stat: "14℃",
                 note: "最低14℃キンキン",
                 image: IMG.gWaterBath,
                 detail:
@@ -168,6 +170,7 @@ export const siteContent = {
             {
                 en: "Cool Down Space",
                 jp: "整いスペース",
+                stat: "5台",
                 note: "インフィニティチェア × 5・屋外外気浴",
                 image: IMG.gRelax,
                 detail:
@@ -176,6 +179,7 @@ export const siteContent = {
             {
                 en: "BBQ Garden",
                 jp: "BBQガーデン",
+                stat: "¥2,200",
                 note: "コンロ ¥2,200・食材持込",
                 image: IMG.bbqGarden,
                 detail:
@@ -184,6 +188,7 @@ export const siteContent = {
             {
                 en: "Living Room",
                 jp: "リビング",
+                stat: "75型",
                 note: "75型TV / HDMI / 10名以上着席可",
                 image: IMG.gLiving,
                 detail:
@@ -192,6 +197,7 @@ export const siteContent = {
             {
                 en: "Bedrooms",
                 jp: "寝室2室",
+                stat: "10名",
                 note: "セミダブル7台 + 和室布団3組",
                 image: IMG.gBed1,
                 detail:
@@ -200,6 +206,7 @@ export const siteContent = {
             {
                 en: "Full Kitchen",
                 jp: "フルキッチン",
+                stat: "IH×2",
                 note: "冷蔵庫 / 電子レンジ / 卓上IH × 2",
                 image: IMG.gDining,
                 detail:
@@ -208,6 +215,7 @@ export const siteContent = {
             {
                 en: "Free Parking",
                 jp: "敷地内駐車場",
+                stat: "無料",
                 note: "無料・台数余裕あり",
                 image: IMG.gExterior1,
                 detail:

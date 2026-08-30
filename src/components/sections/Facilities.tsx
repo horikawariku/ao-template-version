@@ -61,19 +61,16 @@ export function Facilities() {
                         {facilities.items.map((item, i) => (
                             <li
                                 key={item.en}
-                                className="py-5 md:py-6 border-b border-[#4a3a2f] grid grid-cols-[28px_1fr_auto] md:grid-cols-[40px_1fr_auto] gap-3 md:gap-4 items-baseline"
+                                className="py-5 md:py-6 border-b border-[#4a3a2f] grid grid-cols-[76px_1fr_auto] md:grid-cols-[96px_1fr_auto] gap-3 md:gap-4 items-center"
                             >
                                 <span
-                                    className="text-[10px] tracking-[0.2em] text-[#9c9085]"
-                                    style={{ fontFamily: "var(--font-inter)" }}
+                                    className="text-[24px] md:text-[30px] font-bold leading-none text-[#f5efe6] whitespace-nowrap"
+                                    style={{ fontFamily: "var(--font-inter)", fontVariantNumeric: "tabular-nums" }}
                                 >
-                                    {String(i + 1).padStart(2, "0")}
+                                    {"stat" in item ? (item as { stat?: string }).stat : String(i + 1).padStart(2, "0")}
                                 </span>
                                 <div>
-                                    <p
-                                        className="text-[15px] md:text-[16px] tracking-[0.06em] text-[#f5efe6]"
-                                        style={{ fontFamily: "var(--font-noto-serif-jp)" }}
-                                    >
+                                    <p className="text-[15px] md:text-[16px] font-semibold tracking-[0.04em] text-[#f5efe6]">
                                         {item.jp}
                                     </p>
                                     <p

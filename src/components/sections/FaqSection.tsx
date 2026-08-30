@@ -40,10 +40,7 @@ export function FaqSection({ hideHeader = false }: Props) {
                                     >
                                         {String(i + 1).padStart(2, "0")}
                                     </span>
-                                    <span
-                                        className="text-[14px] md:text-[16px] text-[#f5efe6]"
-                                        style={{ fontFamily: "var(--font-noto-serif-jp)" }}
-                                    >
+                                    <span className="text-[14px] md:text-[16px] font-medium text-[#f5efe6]">
                                         {item.q}
                                     </span>
                                     <span className="text-[#f5efe6] flex justify-end">

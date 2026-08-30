@@ -46,15 +46,12 @@ export function HeroFullBleed() {
             {/* Center wordmark */}
             <div className="relative h-full flex flex-col items-center justify-center px-5 text-center">
                 <h1
-                    className="text-white font-light text-[34px] md:text-[68px] lg:text-[88px] leading-[1.1] tracking-[0.12em]"
+                    className="text-white font-medium text-[40px] md:text-[72px] lg:text-[88px] leading-[1.15] tracking-[0.08em]"
                     style={{ fontFamily: "var(--font-noto-serif-jp)" }}
                 >
                     {siteContent.site.name}
                 </h1>
-                <p
-                    className="mt-6 text-white/85 text-[11px] md:text-[13px] tracking-[0.3em]"
-                    style={{ fontFamily: "var(--font-noto-serif-jp)" }}
-                >
+                <p className="mt-5 text-white/95 text-[14px] md:text-[17px] tracking-[0.14em] font-medium">
                     {siteContent.hero.wordmarkJp}
                 </p>
 

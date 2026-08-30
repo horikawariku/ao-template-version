@@ -23,10 +23,7 @@ export function AccessMap() {
                             >
                                 ADDRESS
                             </p>
-                            <p
-                                className="text-[14px] md:text-[15px] leading-[1.9] text-[#f5efe6]"
-                                style={{ fontFamily: "var(--font-noto-serif-jp)" }}
-                            >
+                            <p className="text-[14px] md:text-[15px] leading-[1.9] text-[#f5efe6]">
                                 {access.address}
                             </p>
                         </div>
