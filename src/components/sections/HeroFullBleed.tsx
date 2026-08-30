@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { siteContent } from "@/config/siteContent";
 import { ViewerCounter } from "@/components/ui/ViewerCounter";
-import { BookingLink } from "@/components/ui/BookingLink";
+import { DateRangeSearch } from "@/components/ui/DateRangeSearch";
 
 /**
  * フルブリードのヒーロー。
@@ -58,23 +58,10 @@ export function HeroFullBleed() {
                     {siteContent.hero.wordmarkJp}
                 </p>
 
-                {/* CTA Pill — premium float style */}
-                <BookingLink
-                    baseUrl={siteContent.booking.url}
-                    className="group mt-12 md:mt-16 inline-flex items-center gap-3 px-10 md:px-14 py-4 md:py-5 rounded-full bg-white text-[#1a1310] text-[12px] md:text-[13px] tracking-[0.28em] font-bold transition-all duration-500 ease-out hover:-translate-y-1"
-                    style={{
-                        fontFamily: "var(--font-inter)",
-                        boxShadow: "0 12px 40px -8px rgba(0,0,0,0.35), 0 4px 12px -2px rgba(0,0,0,0.18)",
-                    }}
-                >
-                    <span>{siteContent.hero.ctaLabel}</span>
-                    <span
-                        aria-hidden
-                        className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-1"
-                    >
-                        →
-                    </span>
-                </BookingLink>
+                {/* 日付選択バー (タップでカレンダー展開) */}
+                <div className="mt-12 md:mt-16 w-full flex justify-center">
+                    <DateRangeSearch ctaId="hero" />
+                </div>
 
                 {/* Viewer counter */}
                 <div className="mt-5">
