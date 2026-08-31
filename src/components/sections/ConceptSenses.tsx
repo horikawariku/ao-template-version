@@ -21,11 +21,15 @@ const ICONS = {
 export function ConceptSenses() {
     const { concept } = siteContent;
     const refGrid = useFadeIn<HTMLDivElement>();
-    const refPhoto = useFadeIn<HTMLDivElement>();
 
     return (
-        <section className="bg-[#1a1310] py-24 md:py-36">
-            <div className="px-5 md:px-10 max-w-7xl mx-auto">
+        <section className="relative py-24 md:py-36 overflow-hidden">
+            {/* 背景: サウナ写真 + 暗幕 */}
+            <div className="absolute inset-0">
+                <Image src={concept.photo} alt="" fill sizes="100vw" className="object-cover" />
+                <div className="absolute inset-0 bg-[#1a1310]/82" />
+            </div>
+            <div className="relative px-5 md:px-10 max-w-7xl mx-auto">
                 <SectionHeader
                     index="03"
                     en={concept.en}
@@ -33,24 +37,14 @@ export function ConceptSenses() {
                     lead={concept.leadCopy}
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.3fr] gap-10 md:gap-14 items-stretch">
-                    <div ref={refPhoto} className="fade-in relative aspect-[4/5] md:aspect-auto md:min-h-[520px] overflow-hidden">
-                        <Image
-                            src={concept.photo}
-                            alt={concept.jp}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 40vw"
-                            className="object-cover"
-                        />
-                    </div>
-
-                    <div ref={refGrid} className="fade-in grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+                <div className="grid grid-cols-1">
+                    <div ref={refGrid} className="fade-in grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
                         {concept.features.map((f) => {
                             const Icon = ICONS[f.icon];
                             return (
                                 <article
                                     key={f.title}
-                                    className="bg-[#221915] border border-[#3a2e26] p-6 md:p-7 flex flex-col"
+                                    className="bg-[#221915]/85 backdrop-blur-[2px] border border-[#3a2e26] p-6 md:p-7 flex flex-col"
                                 >
                                     <div className="flex items-center gap-3 mb-5">
                                         <span className="w-10 h-10 rounded-full border border-[#4a3a2f] flex items-center justify-center text-[#f5efe6] shrink-0">

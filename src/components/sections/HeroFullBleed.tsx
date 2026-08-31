@@ -38,21 +38,13 @@ export function HeroFullBleed() {
             {/* SEO用の不可視見出し */}
             <h1 className="sr-only">{siteContent.site.name}</h1>
 
-            {/* 左下: エリア + キャッチ + 日付検索 (mysa hero .c 同型) */}
-            <div className="relative z-10 h-full flex items-end">
-                <div className="w-full px-6 pb-24 md:px-12 md:pb-28 max-w-[680px]">
-                    <p
-                        className="text-[11px] tracking-[0.26em] uppercase font-semibold text-white/85"
-                        style={{ fontFamily: "var(--font-inter)" }}
-                    >
-                        Shiga Takashima — Private Sauna Villa
-                    </p>
-                    <p className="mt-3 text-white text-[17px] md:text-[21px] leading-[1.9] font-medium">
+            {/* 中央: キャッチ + 日付検索 + 閲覧者数 */}
+            <div className="relative z-10 h-full flex items-center justify-center">
+                <div className="w-full px-6 max-w-[520px] flex flex-col items-center text-center">
+                    <p className="text-white text-[18px] md:text-[22px] leading-[1.9] font-medium">
                         {siteContent.hero.wordmarkJp}。
-                        <br />
-                        田園にひらく一棟貸し、1日1組・最大10名。
                     </p>
-                    <div className="mt-6">
+                    <div className="mt-7 w-full flex justify-center">
                         <DateRangeSearch ctaId="hero" />
                     </div>
                     <div className="mt-4">

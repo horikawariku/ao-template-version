@@ -1,5 +1,4 @@
 import { HeroFullBleed } from "@/components/sections/HeroFullBleed";
-import { ConceptIntro } from "@/components/sections/ConceptIntro";
 import { ConceptSenses } from "@/components/sections/ConceptSenses";
 import { Facilities } from "@/components/sections/Facilities";
 import { RoomInfo } from "@/components/sections/RoomInfo";
@@ -15,7 +14,6 @@ export default function Home() {
         <main>
             <WelcomePopup />
             <HeroFullBleed />
-            <ConceptIntro />
             <Gallery />
             <Facilities />
             <ConceptSenses />

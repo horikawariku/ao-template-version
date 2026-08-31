@@ -22,7 +22,7 @@ export function Facilities() {
                 />
 
                 <div ref={refList} className="fade-in grid grid-cols-1 md:grid-cols-2 gap-9 md:gap-x-9 md:gap-y-11">
-                    {facilities.items.map((item, i) => (
+                    {facilities.items.filter((it) => it.en !== "Full Kitchen").map((item, i) => (
                         <div key={item.en}>
                             <div className="rounded-[16px] overflow-hidden aspect-[3/2] md:aspect-[4/3] relative shadow-[0_18px_40px_-30px_rgba(0,0,0,0.6)]">
                                 <Image
