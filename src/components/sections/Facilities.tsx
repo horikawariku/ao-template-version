@@ -28,60 +28,48 @@ export function Facilities() {
                     lead={facilities.leadCopy}
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-10 md:gap-16">
+                <div className="grid grid-cols-1 gap-8">
                     <div
                         ref={refMedia}
                         className={[
-                            "fade-in relative overflow-hidden",
+                            "fade-in relative overflow-hidden rounded-[14px]",
                             showIllustration
-                                ? "aspect-[4/3] bg-white border border-[#3a2e26] flex items-center justify-center p-6"
-                                : "aspect-[4/3]",
+                                ? "aspect-[16/9] bg-white border border-[#3a2e26] flex items-center justify-center p-6"
+                                : "aspect-[16/9] md:aspect-[21/9]",
                         ].join(" ")}
                     >
                         {showIllustration ? (
-                            // illustrationが将来的に画像として用意される場合の表示
                             // eslint-disable-next-line @next/next/no-img-element
-                            <img
-                                src={facilities.illustration!}
-                                alt="間取りイラスト"
-                                className="w-full h-full object-contain"
-                            />
+                            <img src={facilities.illustration!} alt="間取りイラスト" className="w-full h-full object-contain" />
                         ) : (
                             <Image
                                 src={facilities.photo}
                                 alt={facilities.jp}
                                 fill
-                                sizes="(max-width: 768px) 100vw, 60vw"
+                                sizes="100vw"
                                 className="object-cover"
                             />
                         )}
                     </div>
 
-                    <ul ref={refList} className="fade-in flex flex-col">
-                        {facilities.items.map((item, i) => (
+                    {/* mysa specgrid 同型: 枠線カード / 上=項目名 / 下=太字の値 / 補足 */}
+                    <ul ref={refList} className="fade-in grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-3.5">
+                        {facilities.items.map((item) => (
                             <li
                                 key={item.en}
-                                className="py-5 md:py-6 border-b border-[#4a3a2f] grid grid-cols-[76px_1fr_auto] md:grid-cols-[96px_1fr_auto] gap-3 md:gap-4 items-center"
+                                className="rounded-[12px] border border-[#4a3a2f] bg-white/[0.045] px-4 py-3.5"
                             >
-                                <span
-                                    className="text-[24px] md:text-[30px] font-bold leading-none text-[#f5efe6] whitespace-nowrap"
-                                    style={{ fontFamily: "var(--font-inter)", fontVariantNumeric: "tabular-nums" }}
-                                >
-                                    {"stat" in item ? (item as { stat?: string }).stat : String(i + 1).padStart(2, "0")}
+                                <span className="block text-[10px] tracking-[0.12em] text-[#9c9085] font-semibold">
+                                    {item.jp}
                                 </span>
-                                <div>
-                                    <p className="text-[15px] md:text-[16px] font-semibold tracking-[0.04em] text-[#f5efe6]">
-                                        {item.jp}
-                                    </p>
-                                    <p
-                                        className="text-[10px] tracking-[0.25em] text-[#9c9085] mt-1"
-                                        style={{ fontFamily: "var(--font-inter)" }}
-                                    >
-                                        {item.en.toUpperCase()}
-                                    </p>
-                                </div>
+                                <b
+                                    className="block mt-1 text-[17px] md:text-[19px] font-bold text-[#f5efe6] leading-tight"
+                                    style={{ fontVariantNumeric: "tabular-nums" }}
+                                >
+                                    {"stat" in item ? (item as { stat?: string }).stat : ""}
+                                </b>
                                 {item.note && (
-                                    <span className="text-[11px] md:text-[12px] text-[#d8cfc1] text-right max-w-[160px] md:max-w-[220px] leading-[1.6]">
+                                    <span className="block mt-1 text-[10.5px] leading-[1.6] text-[#b7ab9d]">
                                         {item.note}
                                     </span>
                                 )}
