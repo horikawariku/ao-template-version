@@ -40,6 +40,12 @@ export function ReservationBanner() {
                     <p className="mt-4 text-white/85 text-[13px] md:text-[15px] tracking-[0.2em] font-medium">
                         {reservationBanner.jp}
                     </p>
+                    <p
+                        className="mt-3 text-white/90 text-[13px] md:text-[14px] tracking-[0.08em] font-semibold"
+                        style={{ fontFamily: "var(--font-inter)" }}
+                    >
+                        1日1組 ・ 最大10名 ・ ¥9,800〜/人
+                    </p>
 
                     <div className="mt-10 w-full flex justify-center">
                         <DateRangeSearch ctaId="banner" />

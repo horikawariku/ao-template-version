@@ -3,47 +3,40 @@
 import { useFadeIn } from "@/lib/useFadeIn";
 
 interface Props {
-    /** 連番 (例: "01") */
+    /** 連番 (旧API互換・未使用) */
     index?: string;
-    /** 大きく表示する英字タイトル */
+    /** 英字タイトル (mysa shead .en 同型) */
     en: string;
-    /** 小さく表示する和文サブタイトル */
+    /** 和文の説明文 (mysa shead .jp 同型) */
     jp: string;
     /** リード文 (任意) */
     lead?: string;
     align?: "left" | "center";
 }
 
-export function SectionHeader({ index, en, jp, lead, align = "left" }: Props) {
+/**
+ * セクション見出し (mysa の .shead と同型)。
+ * 英字は小さめ太字、説明は日本語の一文で内容が即わかる構成。
+ */
+export function SectionHeader({ en, jp, lead, align = "left" }: Props) {
     const ref = useFadeIn<HTMLDivElement>();
     const alignClass = align === "center" ? "items-center text-center" : "items-start";
 
     return (
-        <div ref={ref} className={`fade-in flex flex-col ${alignClass} mb-10 md:mb-14`}>
-            {index && (
-                <span
-                    className="text-[10px] tracking-[0.4em] text-[#9c9085] mb-3"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                >
-                    — {index}
-                </span>
-            )}
+        <div ref={ref} className={`fade-in flex flex-col ${alignClass} mb-6 md:mb-8`}>
             <h2
-                className="text-[34px] md:text-[56px] leading-[1.05] tracking-[0.04em] text-[#f5efe6] font-light"
+                className="text-[24px] md:text-[28px] font-bold tracking-[-0.01em] text-[#f5efe6]"
                 style={{ fontFamily: "var(--font-inter)" }}
             >
                 {en}
             </h2>
-            <p
-                className="mt-2 text-[12px] md:text-[13px] tracking-[0.3em] text-[#d8cfc1]"
-                style={{ fontFamily: "var(--font-noto-serif-jp)" }}
-            >
+            <p className="mt-1.5 text-[13px] md:text-[14px] text-[#b7ab9d]">
                 {jp}
             </p>
             {lead && (
                 <p
                     className={[
-                        "mt-6 max-w-2xl text-[13px] md:text-[14px] leading-[2] text-[#d8cfc1]",
+                        "mt-4 max-w-2xl text-[13px] md:text-[14px] leading-[2] text-[#d8cfc1]",
                         align === "center" ? "mx-auto" : "",
                     ].join(" ")}
                 >

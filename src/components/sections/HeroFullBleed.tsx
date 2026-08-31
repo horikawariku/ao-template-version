@@ -7,8 +7,8 @@ import { ViewerCounter } from "@/components/ui/ViewerCounter";
 import { DateRangeSearch } from "@/components/ui/DateRangeSearch";
 
 /**
- * フルブリードのヒーロー。
- * 大判写真をクロスフェード、中央に巨大wordmark、下にCTAピル。
+ * フルブリードのヒーロー (mysa 宿詳細ページ同型)。
+ * 左下にエリア表記 + キャッチコピー + 日付検索バー、下中央にスクロール誘導。
  */
 export function HeroFullBleed() {
     const images = siteContent.hero.images;
@@ -21,78 +21,53 @@ export function HeroFullBleed() {
     }, [images.length]);
 
     return (
-        <section className="relative w-full h-[100svh] min-h-[600px] overflow-hidden">
-            {/* Background images (crossfade) */}
+        <section className="relative w-full h-[96svh] min-h-[560px] overflow-hidden">
             {images.map((src, i) => (
                 <div
                     key={src}
                     className="absolute inset-0 transition-opacity duration-[1500ms]"
                     style={{ opacity: i === idx ? 1 : 0 }}
                 >
-                    <Image
-                        src={src}
-                        alt=""
-                        fill
-                        priority={i === 0}
-                        sizes="100vw"
-                        className="object-cover"
-                    />
+                    <Image src={src} alt="" fill priority={i === 0} sizes="100vw" className="object-cover" />
                 </div>
             ))}
 
-            {/* Subtle dark overlay */}
-            <div className="absolute inset-0 bg-[var(--color-night)]/35" />
+            {/* 下部を読ませるためのグラデーション */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/25" />
 
-            {/* Center wordmark */}
-            <div className="relative h-full flex flex-col items-center justify-center px-5 text-center">
-                <h1
-                    className="text-white font-medium text-[40px] md:text-[72px] lg:text-[88px] leading-[1.15] tracking-[0.08em]"
-                    style={{ fontFamily: "var(--font-noto-serif-jp)" }}
-                >
-                    {siteContent.site.name}
-                </h1>
-                <p className="mt-5 text-white/95 text-[14px] md:text-[17px] tracking-[0.14em] font-medium">
-                    {siteContent.hero.wordmarkJp}
-                </p>
+            {/* SEO用の不可視見出し */}
+            <h1 className="sr-only">{siteContent.site.name}</h1>
 
-                {/* 日付選択バー (タップでカレンダー展開) */}
-                <div className="mt-12 md:mt-16 w-full flex justify-center">
-                    <DateRangeSearch ctaId="hero" />
-                </div>
-
-                {/* Viewer counter */}
-                <div className="mt-5">
-                    <ViewerCounter />
+            {/* 左下: エリア + キャッチ + 日付検索 (mysa hero .c 同型) */}
+            <div className="relative z-10 h-full flex items-end">
+                <div className="w-full px-6 pb-24 md:px-12 md:pb-28 max-w-[680px]">
+                    <p
+                        className="text-[11px] tracking-[0.26em] uppercase font-semibold text-white/85"
+                        style={{ fontFamily: "var(--font-inter)" }}
+                    >
+                        Shiga Takashima — Private Sauna Villa
+                    </p>
+                    <p className="mt-3 text-white text-[17px] md:text-[21px] leading-[1.9] font-medium">
+                        {siteContent.hero.wordmarkJp}。
+                        <br />
+                        田園にひらく一棟貸し、1日1組・最大10名。
+                    </p>
+                    <div className="mt-6">
+                        <DateRangeSearch ctaId="hero" />
+                    </div>
+                    <div className="mt-4">
+                        <ViewerCounter />
+                    </div>
                 </div>
             </div>
 
-            {/* Image dots */}
-            {images.length > 1 && (
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-                    {images.map((_, i) => (
-                        <button
-                            key={i}
-                            type="button"
-                            aria-label={`スライド ${i + 1}`}
-                            onClick={() => setIdx(i)}
-                            className={[
-                                "h-[3px] transition-all",
-                                i === idx ? "w-8 bg-white" : "w-4 bg-white/40",
-                            ].join(" ")}
-                        />
-                    ))}
-                </div>
-            )}
-
-            {/* Scroll hint */}
-            <div className="absolute bottom-12 right-6 hidden md:flex flex-col items-center gap-2 text-white/70">
-                <span
-                    className="text-[10px] tracking-[0.3em] [writing-mode:vertical-rl]"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                >
-                    SCROLL
-                </span>
-                <span className="block w-[1px] h-12 bg-white/50" />
+            {/* スクロール誘導 (mysa scrollcue 同型) */}
+            <div
+                className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 text-center text-white/70 text-[10px] tracking-[0.28em]"
+                style={{ fontFamily: "var(--font-inter)" }}
+            >
+                <div>SCROLL</div>
+                <div className="scroll-cue-line w-px h-[30px] bg-white/50 mx-auto mt-2" />
             </div>
         </section>
     );

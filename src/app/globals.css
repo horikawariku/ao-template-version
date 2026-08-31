@@ -41,3 +41,7 @@
    ページが終わったと誤認され離脱するため)。うっすら見えた状態から素早く立ち上げる。 */
 .fade-in { opacity: 0.35; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* mysa同型のスクロール誘導 */
+@keyframes cueLine { 0% { transform: scaleY(0); } 55% { transform: scaleY(1); } 100% { transform: scaleY(0); } }
+.scroll-cue-line { transform-origin: top; animation: cueLine 2.2s ease-in-out infinite; }
