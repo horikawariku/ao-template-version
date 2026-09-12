@@ -95,15 +95,37 @@ dt{font-weight:400}dd{margin:0;font-weight:300}
 @media(max-width:359px){.price-options dd{font-size:26px}.price-options{gap:14px}.nearby-summary-link{gap:12px}}
 
 /* ===== 可読性調整 (2026-09): スクロール誘導 / グレー文字→黒 / 同サイズ黒ラベルは太字 ===== */
-.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:12px;margin:0 auto 44px}
+.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:12px;margin:36px auto 0}
 .scroll-cue span{font-size:10px;font-weight:500;letter-spacing:3px;margin-right:-3px}
 .scroll-cue i{position:relative;display:block;width:1px;height:56px;background:var(--line);overflow:hidden}
 .scroll-cue i:after{content:"";position:absolute;left:0;top:0;width:100%;height:100%;background:var(--dark);animation:scroll-cue-slide 2.2s cubic-bezier(.45,0,.25,1) infinite}
 @keyframes scroll-cue-slide{0%{transform:translateY(-101%)}50%{transform:translateY(0)}100%{transform:translateY(101%)}}
 @media(prefers-reduced-motion:reduce){.scroll-cue i:after{animation:none}}
-@media(max-width:767px){.scroll-cue{margin-bottom:32px}.scroll-cue i{height:44px}}
+@media(max-width:767px){.scroll-cue{margin:26px auto 0}.scroll-cue i{height:44px}}
+/* .intro の上余白はスクロール誘導が担うぶん少し詰める */
+.scroll-cue+.intro{padding-top:88px}
+@media(max-width:767px){.scroll-cue+.intro{padding-top:64px}}
 /* グレー→黒 (明背景の本文・注記のみ。ダーク背景メニュー内のvar(--muted)は対象外) */
 .answer,.amenities dd,.amenity-note,.travel-note,.pricing-heading>span,.pricing-note,.price-inclusions small,.nearby-summary-heading>span,.nearby-summary-text>span,.booking-bar-brand>small,.review-images figcaption{color:#1d1b1b}
 /* 同サイズで既に黒の文字(ラベル側)は太字で区別 */
 summary{font-weight:600}
 .room-specs dt,.amenities dt,.price-options dt,.price-inclusions dt{font-weight:600}
+/* ===== intro直下の日付選択セクション ===== */
+.intro-booking{display:flex;align-items:stretch;justify-content:center;gap:10px;max-width:640px;margin:44px auto 0}
+.intro-date-field{flex:1;display:flex;align-items:center;gap:14px;min-height:54px;padding:8px 42px 8px 18px;background:#fff;border:1px solid var(--dark);text-align:left;cursor:pointer;position:relative;transition:background .15s}
+.intro-date-field:hover{background:#f7f2f1}
+.intro-date-field>svg{width:20px;height:20px;flex-shrink:0}
+.intro-date-field:after{content:"";position:absolute;right:17px;top:50%;width:8px;height:8px;border-right:1.5px solid var(--dark);border-bottom:1.5px solid var(--dark);transform:translateY(-70%) rotate(45deg)}
+.intro-date-copy{display:flex;flex-direction:column;gap:4px}
+.intro-date-copy .bar-label{font-size:9px;letter-spacing:1px}
+#intro-date-text{font-size:13px;line-height:1.5;font-weight:400}
+.intro-booking .booking-bar-submit{gap:12px;justify-content:center;padding:14px 26px}
+@media(max-width:767px){.intro-booking{flex-direction:column;gap:8px;margin-top:32px;max-width:420px}.intro-booking .booking-bar-submit{min-height:52px;font-size:11px;letter-spacing:1px;padding:14px 20px}.intro-booking .booking-bar-submit>span{display:inline;font-size:16px}.intro-date-field{min-height:52px}#intro-date-text{font-size:12px}}
+/* ===== 固定CTAの日付選択を「押せる」入力フィールド風に ===== */
+.booking-bar .bar-dates{border:1px solid var(--dark);background:#fff;border-radius:0;flex-direction:column;justify-content:center;gap:4px;min-height:52px;padding:7px 42px 7px 16px;margin:0 16px 0 0;cursor:pointer;position:relative;transition:background .15s}
+.booking-bar .bar-dates:hover{background:#f7f2f1}
+.booking-bar .bar-dates:after{content:"";position:absolute;right:16px;top:50%;width:8px;height:8px;border-right:1.5px solid var(--dark);border-bottom:1.5px solid var(--dark);transform:translateY(-70%) rotate(45deg)}
+.booking-bar .bar-dates svg{display:none}
+.booking-bar .bar-dates>span:last-child{gap:0;min-width:200px}
+@media(min-width:1024px){.booking-bar .bar-dates{padding-right:42px}.booking-bar .bar-dates>span:last-child{min-width:220px}}
+@media(max-width:767px){.booking-bar .bar-dates{flex:1;min-width:0;padding:6px 30px 6px 12px;margin:0}.booking-bar .bar-dates:after{right:11px;width:7px;height:7px}.booking-bar .bar-dates>span:last-child{min-width:0}}

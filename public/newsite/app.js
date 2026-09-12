@@ -68,7 +68,10 @@ function renderBookingSummary() {
   $('#select-start').classList.toggle('is-selecting', state.selecting === 'start');
   $('#select-end').classList.toggle('is-selecting', state.selecting === 'end');
   const valid = hasRange();
-  if (state.start) $('#bar-date-text').textContent = valid ? `${compactDate(state.start)} — ${compactDate(state.end)}` : `${compactDate(state.start)} — 日付を選択`;
+  if (state.start) {
+    const barText = valid ? `${compactDate(state.start)} — ${compactDate(state.end)}` : `${compactDate(state.start)} — 日付を選択`;
+    ['#bar-date-text', '#intro-date-text'].forEach(sel => { const el = $(sel); if (el) el.textContent = barText; });
+  }
   const datedLink = $('#dated-booking');
   datedLink.href = reservationUrl({...state, attribution});
   datedLink.setAttribute('aria-disabled', String(!valid));
