@@ -95,16 +95,16 @@ dt{font-weight:400}dd{margin:0;font-weight:300}
 @media(max-width:359px){.price-options dd{font-size:26px}.price-options{gap:14px}.nearby-summary-link{gap:12px}}
 
 /* ===== 可読性調整 (2026-09): スクロール誘導 / グレー文字→黒 / 同サイズ黒ラベルは太字 ===== */
-.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:12px;margin:36px auto 0}
+.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:12px;margin:28px auto 0}
 .scroll-cue span{font-size:10px;font-weight:500;letter-spacing:3px;margin-right:-3px}
 .scroll-cue i{position:relative;display:block;width:1px;height:56px;background:var(--line);overflow:hidden}
 .scroll-cue i:after{content:"";position:absolute;left:0;top:0;width:100%;height:100%;background:var(--dark);animation:scroll-cue-slide 2.2s cubic-bezier(.45,0,.25,1) infinite}
 @keyframes scroll-cue-slide{0%{transform:translateY(-101%)}50%{transform:translateY(0)}100%{transform:translateY(101%)}}
 @media(prefers-reduced-motion:reduce){.scroll-cue i:after{animation:none}}
-@media(max-width:767px){.scroll-cue{margin:26px auto 0}.scroll-cue i{height:44px}}
+@media(max-width:767px){.scroll-cue{margin:20px auto 0}.scroll-cue i{height:40px}}
 /* .intro の上余白はスクロール誘導が担うぶん少し詰める */
-.scroll-cue+.intro{padding-top:88px}
-@media(max-width:767px){.scroll-cue+.intro{padding-top:64px}}
+.scroll-cue+.intro{padding-top:44px}
+@media(max-width:767px){.scroll-cue+.intro{padding-top:30px}}
 /* グレー→黒 (明背景の本文・注記のみ。ダーク背景メニュー内のvar(--muted)は対象外) */
 .answer,.amenities dd,.amenity-note,.travel-note,.pricing-heading>span,.pricing-note,.price-inclusions small,.nearby-summary-heading>span,.nearby-summary-text>span,.booking-bar-brand>small,.review-images figcaption{color:#1d1b1b}
 /* 同サイズで既に黒の文字(ラベル側)は太字で区別 */

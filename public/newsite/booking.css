@@ -50,3 +50,10 @@ dialog{padding:0;border:0;color:var(--ink);background:var(--paper)}dialog::backd
 
 /* 可読性調整: 予約ダイアログ(明背景)の小さいグレー文字を黒に */
 .booking-intro,.calendar-week{color:#1d1b1b}
+
+/* 日付選択ポップアップをコンパクトに: カレンダーより上の要素(タイトル・説明文・日付サマリー)を非表示。閉じる×のみ残す */
+.booking-dialog .dialog-top{justify-content:flex-end;margin-bottom:0;min-height:0}
+.booking-dialog .dialog-top h2{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.booking-dialog .booking-intro,.booking-dialog .selected-dates{display:none}
+.booking-dialog{padding-top:8px}
+.booking-dialog .close-button{margin-right:-14px}
