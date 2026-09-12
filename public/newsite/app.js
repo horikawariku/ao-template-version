@@ -1,0 +1,196 @@
+import {UTM_KEYS, localDateKey, nightsBetween, mergeAttribution, reservationUrl} from './booking-core.mjs';
+
+const $ = selector => document.querySelector(selector);
+const $$ = selector => Array.from(document.querySelectorAll(selector));
+const today = new Date();
+const todayKey = localDateKey(today);
+let viewMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+const firstMonth = viewMonth.getTime();
+const state = {start: '', end: '', cta: 'sticky', selecting: 'start'};
+let attribution = {};
+
+// Same source propagation and 30-day first-party cookie as the original AO site.
+// No production page-view beacon or new advertising pixels are added to this separate design.
+try {
+  const entry = document.cookie.split('; ').find(value => value.startsWith('ao_utm='));
+  const previous = entry ? JSON.parse(decodeURIComponent(entry.slice('ao_utm='.length))) : {};
+  attribution = mergeAttribution(previous, new URL(location.href).searchParams);
+} catch {
+  attribution = mergeAttribution({}, new URL(location.href).searchParams);
+}
+try {
+  const currentUrl = new URL(location.href);
+  const incoming = UTM_KEYS.some(key => currentUrl.searchParams.get(key));
+  if (incoming && Object.keys(attribution).length) {
+    document.cookie = `ao_utm=${encodeURIComponent(JSON.stringify(attribution))}; path=/; max-age=${30 * 86400}; samesite=lax${location.protocol === 'https:' ? '; secure' : ''}`;
+  }
+  let changed = false;
+  UTM_KEYS.forEach(key => {
+    if (attribution[key] && !currentUrl.searchParams.has(key)) { currentUrl.searchParams.set(key, attribution[key]); changed = true; }
+  });
+  if (changed) history.replaceState(history.state, '', currentUrl.toString());
+} catch { /* Booking still works when browser storage is unavailable. */ }
+
+$$('[data-keep-attribution]').forEach(link => {
+  const target = new URL(link.getAttribute('href'), location.href);
+  UTM_KEYS.forEach(key => { if (attribution[key]) target.searchParams.set(key, attribution[key]); });
+  link.href = target.toString();
+});
+
+function closeDialog(dialog) { if (dialog?.open) dialog.close(); }
+function openDialog(dialog) {
+  $$('dialog[open]').forEach(closeDialog);
+  dialog.showModal();
+}
+$$('[data-close-dialog]').forEach(button => button.addEventListener('click', () => closeDialog(button.closest('dialog'))));
+$$('dialog').forEach(dialog => {
+  let startedOutside = false;
+  const outside = e => { const r = dialog.getBoundingClientRect(); return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom; };
+  dialog.addEventListener('pointerdown', e => { startedOutside = e.target === dialog && outside(e); });
+  dialog.addEventListener('click', e => { if (startedOutside && e.target === dialog && outside(e)) closeDialog(dialog); startedOutside = false; });
+});
+$$('[data-open-menu]').forEach(button => button.addEventListener('click', () => openDialog($('#menu-dialog'))));
+$$('[data-open-sauna]').forEach(button => button.addEventListener('click', () => {
+  const dialog = $('#sauna-dialog');
+  openDialog(dialog);
+  dialog.scrollTop = 0;
+}));
+$$('.menu-nav a').forEach(link => link.addEventListener('click', () => closeDialog($('#menu-dialog'))));
+
+const shortDate = key => { if (!key) return '日付を選択'; const [year, month, date] = key.split('-').map(Number); return `${month}月${date}日`; };
+const compactDate = key => { const [, month, date] = key.split('-').map(Number); return `${month}/${date}`; };
+const displayDate = key => `${key.slice(0, 4)}年${shortDate(key)}`;
+const hasRange = () => nightsBetween(state.start, state.end) > 0;
+
+function renderBookingSummary() {
+  $('#selected-start').textContent = shortDate(state.start);
+  $('#selected-end').textContent = shortDate(state.end);
+  $('#select-start').classList.toggle('is-selecting', state.selecting === 'start');
+  $('#select-end').classList.toggle('is-selecting', state.selecting === 'end');
+  const valid = hasRange();
+  if (state.start) $('#bar-date-text').textContent = valid ? `${compactDate(state.start)} — ${compactDate(state.end)}` : `${compactDate(state.start)} — 日付を選択`;
+  const datedLink = $('#dated-booking');
+  datedLink.href = reservationUrl({...state, attribution});
+  datedLink.setAttribute('aria-disabled', String(!valid));
+  datedLink.textContent = valid ? `この日程の空室・料金を見る（${nightsBetween(state.start, state.end)}泊） ↗` : '日程を選択してください ↗';
+  $('#undated-booking').href = reservationUrl({cta: state.cta, attribution});
+  $('#calendar-status').textContent = valid && state.selecting !== 'start' ? `${displayDate(state.start)}〜${displayDate(state.end)}・${nightsBetween(state.start, state.end)}泊` : state.selecting === 'end' && state.start ? 'チェックアウト日を選択してください。' : 'チェックイン日を選択してください。';
+}
+
+function selectDay(key) {
+  if (key < todayKey) return;
+  if (state.selecting === 'start' || !state.start || key <= state.start) {
+    state.start = key; state.end = ''; state.selecting = 'end';
+  } else {
+    state.end = key; state.selecting = 'complete';
+  }
+  renderCalendar(); renderBookingSummary();
+  $(`[data-date="${key}"]`)?.focus({preventScroll: true});
+}
+
+function renderCalendar() {
+  const year = viewMonth.getFullYear(); const month = viewMonth.getMonth();
+  $('#calendar-month').textContent = `${year}年 ${month + 1}月`;
+  $('#previous-month').disabled = viewMonth.getTime() <= firstMonth;
+  const grid = $('#calendar-grid'); grid.replaceChildren();
+  const offset = new Date(year, month, 1).getDay();
+  const last = new Date(year, month + 1, 0).getDate();
+  for (let empty = 0; empty < offset; empty++) { const span = document.createElement('span'); span.setAttribute('aria-hidden', 'true'); grid.append(span); }
+  for (let date = 1; date <= last; date++) {
+    const key = localDateKey(new Date(year, month, date));
+    const button = document.createElement('button');
+    button.className = 'day'; button.textContent = date; button.dataset.date = key;
+    button.disabled = key < todayKey;
+    const selected = key === state.start || key === state.end;
+    button.classList.toggle('is-selected', selected);
+    button.classList.toggle('in-range', !!state.start && !!state.end && key > state.start && key < state.end);
+    button.classList.toggle('is-today', key === todayKey);
+    button.setAttribute('aria-label', `${year}年${month + 1}月${date}日${key === state.start ? ' チェックイン日' : key === state.end ? ' チェックアウト日' : ''}`);
+    button.setAttribute('aria-pressed', String(selected));
+    if (key === todayKey) button.setAttribute('aria-current', 'date');
+    button.addEventListener('click', () => { if (state.selecting === 'complete') state.selecting = 'start'; selectDay(key); });
+    button.addEventListener('keydown', event => {
+      const movement = {ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7}[event.key];
+      if (!movement) return;
+      event.preventDefault();
+      const target = new Date(year, month, date + movement); const targetKey = localDateKey(target);
+      if (targetKey < todayKey) return;
+      if (target.getMonth() !== month || target.getFullYear() !== year) { viewMonth = new Date(target.getFullYear(), target.getMonth(), 1); renderCalendar(); }
+      $(`[data-date="${targetKey}"]`)?.focus();
+    });
+    grid.append(button);
+  }
+}
+
+$$('[data-open-booking]').forEach(button => button.addEventListener('click', () => {
+  state.cta = button.dataset.cta || 'sticky';
+  renderCalendar(); renderBookingSummary();
+  openDialog($('#booking-dialog'));
+}));
+$('#previous-month').addEventListener('click', () => { if (viewMonth.getTime() > firstMonth) { viewMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, 1); renderCalendar(); } });
+$('#next-month').addEventListener('click', () => { viewMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 1); renderCalendar(); });
+$('#select-start').addEventListener('click', () => { state.selecting = 'start'; renderBookingSummary(); });
+$('#select-end').addEventListener('click', () => { state.selecting = state.start ? 'end' : 'start'; renderBookingSummary(); });
+$$('.booking-link').forEach(link => link.addEventListener('click', event => {
+  if (link.getAttribute('aria-disabled') === 'true') { event.preventDefault(); return; }
+  try { if (typeof window.fbq === 'function') window.fbq('track', 'InitiateCheckout'); } catch { /* Never block reservation navigation on optional analytics. */ }
+}));
+renderCalendar(); renderBookingSummary();
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+if ($('.hero')) {
+const slides = $$('.hero-slide');
+let slide = 0; let userPaused = false; let heroHovered = false;
+function showSlide(next) {
+  slides[slide].classList.remove('is-active');
+  slide = (next + slides.length) % slides.length;
+  slides[slide].classList.add('is-active');
+  $('#slide-number').textContent = String(slide + 1).padStart(2, '0');
+}
+function updatePauseButton() {
+  const paused = userPaused || reducedMotion.matches;
+  $('.slide-pause').disabled = reducedMotion.matches;
+  $('.slide-pause').setAttribute('aria-pressed', String(paused));
+  $('.slide-pause').setAttribute('aria-label', reducedMotion.matches ? '動きを減らす設定により自動切り替えを停止中' : paused ? '写真の自動切り替えを再開' : '写真の自動切り替えを停止');
+  $('.slide-pause').firstElementChild.textContent = paused ? '▷' : 'Ⅱ';
+}
+$('.hero-prev').addEventListener('click', () => { showSlide(slide - 1); userPaused = true; updatePauseButton(); });
+$('.hero-next').addEventListener('click', () => { showSlide(slide + 1); userPaused = true; updatePauseButton(); });
+$('.slide-pause').addEventListener('click', () => { userPaused = !userPaused; updatePauseButton(); });
+$('.hero').addEventListener('mouseenter', () => { heroHovered = true; });
+$('.hero').addEventListener('mouseleave', () => { heroHovered = false; });
+setInterval(() => {
+  if (!userPaused && !heroHovered && !reducedMotion.matches && !document.hidden && !$('.hero').contains(document.activeElement) && !$('dialog[open]')) showSlide(slide + 1);
+}, 6500);
+reducedMotion.addEventListener('change', updatePauseButton); updatePauseButton();
+
+}
+
+const galleryItems = $$('[data-gallery]');
+if (galleryItems.length && $('#gallery-dialog')) {
+let galleryIndex = 0;
+function showGallery(index) {
+  galleryIndex = (index + galleryItems.length) % galleryItems.length;
+  const image = galleryItems[galleryIndex].querySelector('img');
+  $('#gallery-large').src = image.src; $('#gallery-large').alt = image.alt;
+  $('#gallery-caption').textContent = image.alt;
+  $('#gallery-counter').textContent = `${String(galleryIndex + 1).padStart(2, '0')} / ${String(galleryItems.length).padStart(2, '0')}`;
+}
+galleryItems.forEach((button, index) => button.addEventListener('click', () => { showGallery(index); openDialog($('#gallery-dialog')); }));
+$('#gallery-prev').addEventListener('click', () => showGallery(galleryIndex - 1));
+$('#gallery-next').addEventListener('click', () => showGallery(galleryIndex + 1));
+$('#gallery-dialog').addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft') { event.preventDefault(); showGallery(galleryIndex - 1); }
+  if (event.key === 'ArrowRight') { event.preventDefault(); showGallery(galleryIndex + 1); }
+});
+
+let swipeStart = null;
+$('#gallery-large').addEventListener('pointerdown', event => { swipeStart = {x: event.clientX, y: event.clientY}; });
+$('#gallery-large').addEventListener('pointerup', event => {
+  if (!swipeStart) return;
+  const dx = event.clientX - swipeStart.x; const dy = event.clientY - swipeStart.y;
+  if (Math.abs(dx) > 60 && Math.abs(dy) < 60) showGallery(galleryIndex + (dx < 0 ? 1 : -1));
+  swipeStart = null;
+});
+$('#gallery-large').addEventListener('pointercancel', () => { swipeStart = null; });
+}

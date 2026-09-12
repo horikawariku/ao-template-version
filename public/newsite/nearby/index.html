@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1d1b1b">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="サウナヴィラ碧から訪ねる近隣施設。メタセコイア並木、箱館山、白鬚神社、LAMP、竜王アウトレットをご紹介します。">
+<title>近隣施設 | サウナヴィラ 碧</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../booking.css">
+<script type="module" src="../app.js"></script>
+<link rel="stylesheet" href="nearby.css">
+</head>
+<body class="nearby-page">
+<a class="skip-link" href="#main">近隣施設の紹介へ移動</a>
+<header class="area-header"><div class="area-header-inner"><a class="area-back" href="../#nearby" data-keep-attribution aria-label="宿の紹介ページに戻る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg><span>戻る</span></a><a class="area-brand" href="../" data-keep-attribution>VILLA AO</a><button class="area-book" data-open-booking data-cta="nearby-header">空室を確認</button></div></header>
+<main class="area-main" id="main">
+ <div class="area-intro"><h1>AROUND AO</h1><p>近隣施設のご紹介</p><span>ヴィラを拠点に、湖西の風景や街を楽しむ。</span></div>
+ <div class="area-places"><article class="nearby-place" id="metasequoia"><figure><img src="../assets/near-metasequoia.webp" alt="メタセコイア並木" width="1080" height="720" loading="lazy"></figure><div class="nearby-caption"><p class="nearby-en">METASEQUOIA AVENUE</p><h2>メタセコイア並木</h2><p class="nearby-time">車で約9分</p><p>全長2.4kmの並木道。四季ごとに表情を変える風景を楽しめます。</p></div></article><article class="nearby-place" id="hakodateyama"><figure><img src="../assets/near-hakodate.webp" alt="箱館山ゴンドラ" width="1080" height="720" loading="lazy"></figure><div class="nearby-caption"><p class="nearby-en">HAKODATEYAMA</p><h2>箱館山ゴンドラ</h2><p class="nearby-time">車で約4分</p><p>ゴンドラに乗って、琵琶湖を見下ろす展望へ。</p></div></article><article class="nearby-place" id="shirahige"><figure><img src="../assets/near-shirahige.webp" alt="白鬚神社" width="1080" height="720" loading="lazy"></figure><div class="nearby-caption"><p class="nearby-en">SHIRAHIGE SHRINE</p><h2>白鬚神社</h2><p class="nearby-time">車で約30分</p><p>琵琶湖に立つ鳥居が印象的な、湖畔の神社。</p></div></article><article class="nearby-place" id="lamp"><figure><img src="../assets/near-lamp.webp" alt="パフェ専門店 LAMP" width="1080" height="720" loading="lazy"></figure><div class="nearby-caption"><p class="nearby-en">LAMP</p><h2>パフェ専門店 LAMP</h2><p class="nearby-time">車で約10分</p><p>湖西でのひと休みに。パフェを楽しめるお店です。</p></div></article><article class="nearby-place" id="outlet"><figure><img src="../assets/near-outlet.webp" alt="竜王アウトレット" width="1080" height="720" loading="lazy"></figure><div class="nearby-caption"><p class="nearby-en">RYUOH OUTLET</p><h2>竜王アウトレット</h2><p class="nearby-time">車で約60分</p><p>国内外のブランドが集まるアウトレットモール。旅の行き帰りのお買い物に。</p></div></article></div>
+ <p class="area-travel-note">所要時間は車での目安です。道路状況により変わります。</p>
+ <div class="area-bottom"><a class="button-outline" href="../#nearby" data-keep-attribution>宿の紹介ページに戻る</a></div>
+</main>
+  <aside class="booking-bar" aria-label="宿泊日を選択して空室を確認">
+    <div class="booking-bar-brand"><span>STAY AT AO</span><small>一日一組のプライベートヴィラ</small></div>
+    <button class="bar-dates" data-open-booking data-cta="nearby-sticky"><span class="bar-label">CHECK IN — CHECK OUT</span><span id="bar-date-text">ご希望の日程を選択 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="5" width="14" height="12"/><path d="M3 9h14M7 2v5m6-5v5"/></svg></span></button>
+    <button class="booking-bar-submit" data-open-booking data-cta="nearby-sticky">空室・料金を確認 <span aria-hidden="true">↗</span></button>
+  </aside>
+  <dialog class="booking-dialog" id="booking-dialog" aria-labelledby="booking-title">
+    <div class="dialog-top"><h2 id="booking-title">日程を選択</h2><button class="close-button" data-close-dialog aria-label="日程選択を閉じる">×</button></div>
+    <p class="booking-intro">チェックイン日とチェックアウト日を選んでください。</p>
+    <div class="selected-dates"><button id="select-start"><span>CHECK IN</span><strong id="selected-start">日付を選択</strong></button><span class="date-divider" aria-hidden="true">→</span><button id="select-end"><span>CHECK OUT</span><strong id="selected-end">日付を選択</strong></button></div>
+    <div class="calendar-heading"><button class="calendar-nav" id="previous-month" aria-label="前の月">←</button><h3 id="calendar-month" aria-live="polite"></h3><button class="calendar-nav" id="next-month" aria-label="次の月">→</button></div>
+    <div class="calendar-week" aria-hidden="true"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div><div class="calendar-grid" id="calendar-grid" role="group" aria-labelledby="calendar-month"></div>
+    <p id="calendar-status" class="calendar-status" aria-live="polite">チェックイン日を選択してください。</p>
+    <a class="dark-button booking-link" id="dated-booking" href="https://redirect-tracker-eta.vercel.app/api/redirect?p=ao&amp;s=direct&amp;cta=sticky" aria-disabled="true">日程を選択してください <span aria-hidden="true">↗</span></a>
+    <a class="undated-link booking-link" id="undated-booking" href="https://redirect-tracker-eta.vercel.app/api/redirect?p=ao&amp;s=direct&amp;cta=sticky">日付を決めずに空室を見る <span aria-hidden="true">↗</span></a>
+    <p class="booking-note">人数の選択・空室状況・宿泊料金は、次の予約画面でご確認ください。</p>
+  </dialog>
+<noscript><div class="noscript-booking"><a href="https://redirect-tracker-eta.vercel.app/api/redirect?p=ao&amp;s=direct&amp;cta=gallery-noscript">予約画面で空室・料金を確認する</a></div></noscript>
+</body>
+</html>
