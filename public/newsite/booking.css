@@ -47,3 +47,6 @@ dialog{padding:0;border:0;color:var(--ink);background:var(--paper)}dialog::backd
 
 /* Date-only booking; the reservation provider handles party size. */
 .booking-dialog #dated-booking{margin-top:12px}
+
+/* 可読性調整: 予約ダイアログ(明背景)の小さいグレー文字を黒に */
+.booking-intro,.calendar-week{color:#1d1b1b}

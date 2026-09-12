@@ -93,3 +93,17 @@ dt{font-weight:400}dd{margin:0;font-weight:300}
 .reviews-section[hidden]{display:none!important}.reviews-section{padding:96px 48px}.reviews-container{max-width:1104px;margin:auto}.reviews-container>h2{font-size:48px;line-height:1.2}.reviews-subtitle{font-size:15px;margin-top:20px}.review-images{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;margin-top:40px}.review-images figure{max-width:900px;margin:auto;width:100%}.review-images img{height:auto;object-fit:contain}.review-images figcaption{font-size:13px;line-height:1.8;margin-top:12px;color:var(--muted)}
 @media(max-width:767px){.pricing-section{padding:64px 24px}.pricing-container{grid-template-columns:minmax(0,1fr);gap:32px}.pricing-heading h2{font-size:40px}.pricing-heading>p{font-size:14px;margin-top:16px}.pricing-heading>span{margin-top:16px}.price-options{gap:20px;padding:24px 0}.price-options dd{font-size:clamp(26px,7.8vw,36px)}.price-currency,.price-from{font-size:18px}.price-options dt{margin-bottom:14px}.price-inclusions{margin:24px 0}.pricing-book{font-size:12px}.nearby-summary{grid-template-columns:minmax(0,1fr);gap:32px;padding:64px 24px}.nearby-summary-heading h2{font-size:40px}.nearby-summary-heading>p{font-size:14px;margin-top:16px}.nearby-summary-heading>span{margin-top:16px}.nearby-summary-heading>.button-outline{margin-top:24px}.nearby-summary-link{grid-template-columns:72px minmax(0,1fr) 16px;gap:16px;padding:14px 0}.nearby-summary-link>img{width:72px;height:56px}.nearby-summary-text{gap:5px}.nearby-summary-text>strong{font-size:13px}.reviews-section{padding:64px 24px}.reviews-container>h2{font-size:40px}.reviews-subtitle{font-size:14px}.review-images{margin-top:32px;gap:24px}}
 @media(max-width:359px){.price-options dd{font-size:26px}.price-options{gap:14px}.nearby-summary-link{gap:12px}}
+
+/* ===== 可読性調整 (2026-09): スクロール誘導 / グレー文字→黒 / 同サイズ黒ラベルは太字 ===== */
+.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:12px;margin:0 auto 44px}
+.scroll-cue span{font-size:10px;font-weight:500;letter-spacing:3px;margin-right:-3px}
+.scroll-cue i{position:relative;display:block;width:1px;height:56px;background:var(--line);overflow:hidden}
+.scroll-cue i:after{content:"";position:absolute;left:0;top:0;width:100%;height:100%;background:var(--dark);animation:scroll-cue-slide 2.2s cubic-bezier(.45,0,.25,1) infinite}
+@keyframes scroll-cue-slide{0%{transform:translateY(-101%)}50%{transform:translateY(0)}100%{transform:translateY(101%)}}
+@media(prefers-reduced-motion:reduce){.scroll-cue i:after{animation:none}}
+@media(max-width:767px){.scroll-cue{margin-bottom:32px}.scroll-cue i{height:44px}}
+/* グレー→黒 (明背景の本文・注記のみ。ダーク背景メニュー内のvar(--muted)は対象外) */
+.answer,.amenities dd,.amenity-note,.travel-note,.pricing-heading>span,.pricing-note,.price-inclusions small,.nearby-summary-heading>span,.nearby-summary-text>span,.booking-bar-brand>small,.review-images figcaption{color:#1d1b1b}
+/* 同サイズで既に黒の文字(ラベル側)は太字で区別 */
+summary{font-weight:600}
+.room-specs dt,.amenities dt,.price-options dt,.price-inclusions dt{font-weight:600}
