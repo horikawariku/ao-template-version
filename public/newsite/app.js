@@ -16,7 +16,7 @@ let perNight = {};
 const perPersonLabel = key => {
   const total = perNight[key];
   if (!total) return '';
-  const pp = Math.floor(total / PRICE_DIVISOR / 100) * 100;
+  const pp = Math.round(total / PRICE_DIVISOR / 100) * 100; // 100円単位に四捨五入 (RATESセクションの¥9,800〜表記と同じ丸め)
   return pp >= 10000 ? `¥${String(Math.floor(pp / 1000) / 10).replace(/\.0$/, '')}万〜` : `¥${pp.toLocaleString('ja-JP')}〜`;
 };
 
@@ -169,7 +169,7 @@ fetch(RATES_URL)
       const priceNum = $('#bar-price-num');
       if (priceNum) {
         const min = Math.min(...Object.values(perNight));
-        const pp = Math.floor(min / PRICE_DIVISOR / 100) * 100;
+        const pp = Math.round(min / PRICE_DIVISOR / 100) * 100;
         priceNum.textContent = `¥${pp.toLocaleString('ja-JP')}`;
       }
       renderCalendar();
@@ -223,7 +223,7 @@ heroSlides.addEventListener('pointerup', e => {
 heroSlides.addEventListener('pointercancel', () => { swipeX = null; });
 setInterval(() => {
   if (!userPaused && !heroHovered && !reducedMotion.matches && !document.hidden && !$('.hero').contains(document.activeElement) && !$('dialog[open]')) showSlide(slide + 1);
-}, 6500);
+}, 2000);
 reducedMotion.addEventListener('change', updatePauseButton); updatePauseButton();
 
 }

@@ -139,7 +139,8 @@ summary{font-weight:600}
 .hero-wordmark{font-family:var(--sans);font-weight:900;font-size:46px;letter-spacing:13px;margin-right:-13px;line-height:1.1;text-shadow:0 2px 26px #00000073}
 .hero-name{margin-top:15px;font-size:12px;font-weight:600;letter-spacing:3px;margin-right:-3px;text-shadow:0 1px 12px #00000073}
 .hero-lead{margin-top:24px;font-size:12.5px;font-weight:400;line-height:2.15;letter-spacing:.06em;color:#fffffff2;text-shadow:0 1px 14px #00000080;text-wrap:balance}
-.hero .scroll-cue{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);margin:0;z-index:2;color:#fff}
+.hero .scroll-cue{position:absolute;left:50%;bottom:calc(42px + env(safe-area-inset-bottom));transform:translateX(-50%);margin:0;z-index:2;color:#fff}
+.hero .slide-arrow{display:none}
 .hero .scroll-cue span{text-shadow:0 1px 8px #00000080}
 .hero .scroll-cue i{background:#ffffff45;height:46px}
 .hero .scroll-cue i:after{background:#fff}
