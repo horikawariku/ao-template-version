@@ -9,6 +9,17 @@ const firstMonth = viewMonth.getTime();
 const state = {start: '', end: '', cta: 'sticky', selecting: 'start'};
 let attribution = {};
 
+// Airhostの日別最低料金 (redirect-tracker経由・24hキャッシュ)。取得失敗時は価格表示なしで通常動作。
+const RATES_URL = 'https://redirect-tracker-eta.vercel.app/api/rates/ao';
+const PRICE_DIVISOR = 10; // 1名あたり = 1棟料金 ÷ 最大10名 (RATESセクションの「1名あたりの料金目安」と同じ換算)
+let perNight = {};
+const perPersonLabel = key => {
+  const total = perNight[key];
+  if (!total) return '';
+  const pp = Math.floor(total / PRICE_DIVISOR / 100) * 100;
+  return pp >= 10000 ? `¥${String(Math.floor(pp / 1000) / 10).replace(/\.0$/, '')}万〜` : `¥${pp.toLocaleString('ja-JP')}〜`;
+};
+
 // Same source propagation and 30-day first-party cookie as the original AO site.
 // No production page-view beacon or new advertising pixels are added to this separate design.
 try {
@@ -102,8 +113,17 @@ function renderCalendar() {
   for (let date = 1; date <= last; date++) {
     const key = localDateKey(new Date(year, month, date));
     const button = document.createElement('button');
-    button.className = 'day'; button.textContent = date; button.dataset.date = key;
+    button.className = 'day'; button.dataset.date = key;
+    const num = document.createElement('span');
+    num.className = 'day-num'; num.textContent = date;
+    button.append(num);
     button.disabled = key < todayKey;
+    const priceLabel = button.disabled ? '' : perPersonLabel(key);
+    if (priceLabel) {
+      const price = document.createElement('small');
+      price.className = 'day-price'; price.textContent = priceLabel;
+      button.append(price);
+    }
     const selected = key === state.start || key === state.end;
     button.classList.toggle('is-selected', selected);
     button.classList.toggle('in-range', !!state.start && !!state.end && key > state.start && key < state.end);
@@ -139,6 +159,17 @@ $$('.booking-link').forEach(link => link.addEventListener('click', event => {
   try { if (typeof window.fbq === 'function') window.fbq('track', 'InitiateCheckout'); } catch { /* Never block reservation navigation on optional analytics. */ }
 }));
 renderCalendar(); renderBookingSummary();
+
+fetch(RATES_URL)
+  .then(r => (r.ok ? r.json() : null))
+  .then(data => {
+    if (data && data.per_night && Object.keys(data.per_night).length) {
+      perNight = data.per_night;
+      $('#calendar-price-note')?.removeAttribute('hidden');
+      renderCalendar();
+    }
+  })
+  .catch(() => { /* 価格が取れなくても予約動線は通常どおり */ });
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 if ($('.hero')) {

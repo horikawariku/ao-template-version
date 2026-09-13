@@ -112,20 +112,20 @@ summary{font-weight:600}
 .room-specs dt,.amenities dt,.price-options dt,.price-inclusions dt{font-weight:600}
 /* ===== intro直下の日付選択セクション ===== */
 .intro-booking{display:flex;align-items:stretch;justify-content:center;gap:10px;max-width:640px;margin:44px auto 0}
-.intro-date-field{flex:1;display:flex;align-items:center;gap:14px;min-height:54px;padding:8px 42px 8px 18px;background:#fff;border:1px solid var(--dark);text-align:left;cursor:pointer;position:relative;transition:background .15s}
+.intro-date-field{flex:1;display:flex;align-items:center;gap:14px;min-height:54px;padding:8px 18px;background:#fff;border:1px solid var(--dark);text-align:left;cursor:pointer;transition:background .15s}
 .intro-date-field:hover{background:#f7f2f1}
-.intro-date-field>svg{width:20px;height:20px;flex-shrink:0}
-.intro-date-field:after{content:"";position:absolute;right:17px;top:50%;width:8px;height:8px;border-right:1.5px solid var(--dark);border-bottom:1.5px solid var(--dark);transform:translateY(-70%) rotate(45deg)}
+.intro-date-field>svg{width:20px;height:20px;flex-shrink:0;margin-left:auto}
 .intro-date-copy{display:flex;flex-direction:column;gap:4px}
 .intro-date-copy .bar-label{font-size:9px;letter-spacing:1px}
 #intro-date-text{font-size:13px;line-height:1.5;font-weight:400}
 .intro-booking .booking-bar-submit{gap:12px;justify-content:center;padding:14px 26px}
 @media(max-width:767px){.intro-booking{flex-direction:column;gap:8px;margin-top:32px;max-width:420px}.intro-booking .booking-bar-submit{min-height:52px;font-size:11px;letter-spacing:1px;padding:14px 20px}.intro-booking .booking-bar-submit>span{display:inline;font-size:16px}.intro-date-field{min-height:52px}#intro-date-text{font-size:12px}}
-/* ===== 固定CTAの日付選択を「押せる」入力フィールド風に ===== */
-.booking-bar .bar-dates{border:1px solid var(--dark);background:#fff;border-radius:0;flex-direction:column;justify-content:center;gap:4px;min-height:52px;padding:7px 42px 7px 16px;margin:0 16px 0 0;cursor:pointer;position:relative;transition:background .15s}
+/* ===== 固定CTA: 中央フローティングの小型バー + 入力フィールド風の日付選択 (▾は廃止しカレンダーアイコン) ===== */
+.booking-bar{left:50%;right:auto;bottom:12px;transform:translateX(-50%);width:auto;max-width:calc(100vw - 20px);min-height:0;padding:8px;background:rgba(240,235,235,.97);border:1px solid var(--line);box-shadow:0 10px 30px #00000024;gap:8px;justify-content:center}
+.booking-bar-brand{display:none}
+.booking-bar .bar-dates{border:1px solid var(--dark);background:#fff;display:flex;flex-direction:row;align-items:center;gap:16px;min-height:52px;padding:7px 16px;margin:0;cursor:pointer;transition:background .15s}
 .booking-bar .bar-dates:hover{background:#f7f2f1}
-.booking-bar .bar-dates:after{content:"";position:absolute;right:16px;top:50%;width:8px;height:8px;border-right:1.5px solid var(--dark);border-bottom:1.5px solid var(--dark);transform:translateY(-70%) rotate(45deg)}
-.booking-bar .bar-dates svg{display:none}
-.booking-bar .bar-dates>span:last-child{gap:0;min-width:200px}
-@media(min-width:1024px){.booking-bar .bar-dates{padding-right:42px}.booking-bar .bar-dates>span:last-child{min-width:220px}}
-@media(max-width:767px){.booking-bar .bar-dates{flex:1;min-width:0;padding:6px 30px 6px 12px;margin:0}.booking-bar .bar-dates:after{right:11px;width:7px;height:7px}.booking-bar .bar-dates>span:last-child{min-width:0}}
+.booking-bar .bar-dates .bar-dates-copy{display:flex;flex-direction:column;gap:4px;min-width:190px;text-align:left}
+.booking-bar .bar-dates #bar-date-text{font-size:13px;line-height:1.5;white-space:nowrap}
+.booking-bar .bar-dates .bar-cal{display:block;width:19px;height:19px;flex-shrink:0;margin-left:auto}
+@media(max-width:767px){.booking-bar{bottom:10px;padding:7px;gap:7px}.booking-bar .bar-dates{min-height:48px;padding:6px 12px;gap:10px}.booking-bar .bar-dates .bar-dates-copy{min-width:0}.booking-bar .bar-dates #bar-date-text{font-size:12px}.booking-bar .booking-bar-submit{min-height:48px}}

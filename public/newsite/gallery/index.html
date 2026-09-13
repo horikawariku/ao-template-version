@@ -32,7 +32,7 @@
 </main>
   <aside class="booking-bar" aria-label="宿泊日を選択して空室を確認">
     <div class="booking-bar-brand"><span>STAY AT AO</span><small>一日一組のプライベートヴィラ</small></div>
-    <button class="bar-dates" data-open-booking data-cta="gallery-sticky"><span class="bar-label">CHECK IN — CHECK OUT</span><span id="bar-date-text">ご希望の日程を選択 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="5" width="14" height="12"/><path d="M3 9h14M7 2v5m6-5v5"/></svg></span></button>
+    <button class="bar-dates" data-open-booking data-cta="gallery-sticky"><span class="bar-dates-copy"><span class="bar-label">CHECK IN — CHECK OUT</span><span id="bar-date-text">ご希望の日程を選択</span></span><svg class="bar-cal" viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="5" width="14" height="12"/><path d="M3 9h14M7 2v5m6-5v5"/></svg></button>
     <button class="booking-bar-submit" data-open-booking data-cta="gallery-sticky">空室・料金を確認 <span aria-hidden="true">↗</span></button>
   </aside>
   <dialog class="booking-dialog" id="booking-dialog" aria-labelledby="booking-title">
@@ -41,6 +41,7 @@
     <div class="selected-dates"><button id="select-start"><span>CHECK IN</span><strong id="selected-start">日付を選択</strong></button><span class="date-divider" aria-hidden="true">→</span><button id="select-end"><span>CHECK OUT</span><strong id="selected-end">日付を選択</strong></button></div>
     <div class="calendar-heading"><button class="calendar-nav" id="previous-month" aria-label="前の月">←</button><h3 id="calendar-month" aria-live="polite"></h3><button class="calendar-nav" id="next-month" aria-label="次の月">→</button></div>
     <div class="calendar-week" aria-hidden="true"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div><div class="calendar-grid" id="calendar-grid" role="group" aria-labelledby="calendar-month"></div>
+    <p class="calendar-price-note" id="calendar-price-note" hidden>料金は1名あたり・最大10名でご利用時の1泊最低料金の目安です。</p>
     <p id="calendar-status" class="calendar-status" aria-live="polite">チェックイン日を選択してください。</p>
     <a class="dark-button booking-link" id="dated-booking" href="https://redirect-tracker-eta.vercel.app/api/redirect?p=ao&amp;s=direct&amp;cta=sticky" aria-disabled="true">日程を選択してください <span aria-hidden="true">↗</span></a>
     <a class="undated-link booking-link" id="undated-booking" href="https://redirect-tracker-eta.vercel.app/api/redirect?p=ao&amp;s=direct&amp;cta=sticky">日付を決めずに空室を見る <span aria-hidden="true">↗</span></a>

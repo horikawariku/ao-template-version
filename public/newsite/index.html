@@ -49,10 +49,22 @@
   </div>
   <div class="intro-booking" role="group" aria-label="宿泊日を選んで空室を確認">
    <button class="intro-date-field" data-open-booking data-cta="intro">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="5" width="14" height="12"/><path d="M3 9h14M7 2v5m6-5v5"/></svg>
     <span class="intro-date-copy"><span class="bar-label">CHECK IN — CHECK OUT</span><span id="intro-date-text">ご希望の日程を選択</span></span>
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="5" width="14" height="12"/><path d="M3 9h14M7 2v5m6-5v5"/></svg>
    </button>
    <button class="booking-bar-submit intro-booking-submit" data-open-booking data-cta="intro">空室・料金を確認 <span aria-hidden="true">↗</span></button>
+  </div>
+ </section>
+ <section class="pricing-section" id="pricing" aria-labelledby="pricing-title">
+  <div class="pricing-container">
+   <div class="pricing-heading"><h2 id="pricing-title">RATES</h2><p>宿泊料金</p><span>一日一組・一棟貸切</span></div>
+   <div class="pricing-content">
+    <p class="pricing-caption">1名あたりの料金目安</p>
+    <dl class="price-options"><div><dt>平日</dt><dd><span class="price-currency">¥</span>9,800<span class="price-from">〜</span></dd></div><div><dt>週末</dt><dd><span class="price-currency">¥</span>14,000<span class="price-from">〜</span></dd></div></dl>
+    <p class="pricing-note">人数・日程・プランによって料金は異なります。<br>ご希望の条件での宿泊料金総額は、予約画面でご確認ください。</p>
+    <dl class="price-inclusions"><div><dt>宿泊料金に含まれるもの</dt><dd>一棟貸切・サウナ・水風呂・設備とアメニティ<br>敷地内駐車場は無料でご利用いただけます。</dd></div><div><dt>追加オプション</dt><dd>BBQコンロ <strong>2,200円（税込）</strong><small>食材・炭・調味料はお持ちください。</small></dd></div></dl>
+    <button class="button-dark pricing-book" data-open-booking data-cta="pricing">日程を選んで料金を見る</button>
+   </div>
   </div>
  </section>
  <div class="wide-container">
@@ -95,18 +107,6 @@
    <dl class="room-specs"><div><dt>チェックイン</dt><dd>15:00〜20:00（セルフチェックイン）</dd></div><div><dt>チェックアウト</dt><dd>10:00まで</dd></div><div><dt>寝具</dt><dd>洋室：セミダブルベッド7台<br>和室：布団3組</dd></div><div><dt>駐車場</dt><dd>敷地内無料・複数台でのご利用可</dd></div></dl><div class="amenities"><h3>設備・アメニティ</h3><dl><div><dt>サウナ・水風呂</dt><dd>最高110℃・最大8人のTV付き貸切サウナ。Netflix・YouTube・Amazon Prime視聴可、大音量OK、セルフロウリュ可。専用水風呂、インフィニティチェア5台。</dd></div><div><dt>リビング</dt><dd>75型テレビ、HDMI接続、Netflix・YouTube、Wi-Fi。</dd></div><div><dt>キッチン</dt><dd>冷蔵庫、電子レンジ、卓上IH2台、調理道具、食器・カトラリー一式。</dd></div><div><dt>バス・洗面</dt><dd>バスタオル、フェイスタオル、歯ブラシ、ドライヤー、シャンプー、ボディソープ。</dd></div><div><dt>BBQ</dt><dd>コンロ利用は2,200円（税込）。ご予約時にお申し付けください。食材・調味料・炭はお持ちください。</dd></div></dl><p class="amenity-note">塩・胡椒・油などの消耗品はご持参ください。</p></div>
   </div>
  </section>
- <section class="pricing-section" id="pricing" aria-labelledby="pricing-title">
-  <div class="pricing-container">
-   <div class="pricing-heading"><h2 id="pricing-title">RATES</h2><p>宿泊料金</p><span>一日一組・一棟貸切</span></div>
-   <div class="pricing-content">
-    <p class="pricing-caption">1名あたりの料金目安</p>
-    <dl class="price-options"><div><dt>平日</dt><dd><span class="price-currency">¥</span>9,800<span class="price-from">〜</span></dd></div><div><dt>週末</dt><dd><span class="price-currency">¥</span>14,000<span class="price-from">〜</span></dd></div></dl>
-    <p class="pricing-note">人数・日程・プランによって料金は異なります。<br>ご希望の条件での宿泊料金総額は、予約画面でご確認ください。</p>
-    <dl class="price-inclusions"><div><dt>宿泊料金に含まれるもの</dt><dd>一棟貸切・サウナ・水風呂・設備とアメニティ<br>敷地内駐車場は無料でご利用いただけます。</dd></div><div><dt>追加オプション</dt><dd>BBQコンロ <strong>2,200円（税込）</strong><small>食材・炭・調味料はお持ちください。</small></dd></div></dl>
-    <button class="button-dark pricing-book" data-open-booking data-cta="pricing">日程を選んで料金を見る</button>
-   </div>
-  </div>
- </section>
  <!-- Review images will be supplied by the owner. This section is not shown until real reviews are available. -->
  <section class="reviews-section" id="reviews" aria-labelledby="reviews-title" hidden>
   <div class="reviews-container"><h2 id="reviews-title">GUEST REVIEWS</h2><p class="reviews-subtitle">ご宿泊者の声</p><div class="review-images"></div></div>
@@ -134,7 +134,7 @@
 </footer>
   <aside class="booking-bar" aria-label="宿泊日を選択して空室を確認">
     <div class="booking-bar-brand"><span>STAY AT AO</span><small>一日一組のプライベートヴィラ</small></div>
-    <button class="bar-dates" data-open-booking data-cta="sticky"><span class="bar-label">CHECK IN — CHECK OUT</span><span id="bar-date-text">ご希望の日程を選択 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="5" width="14" height="12"/><path d="M3 9h14M7 2v5m6-5v5"/></svg></span></button>
+    <button class="bar-dates" data-open-booking data-cta="sticky"><span class="bar-dates-copy"><span class="bar-label">CHECK IN — CHECK OUT</span><span id="bar-date-text">ご希望の日程を選択</span></span><svg class="bar-cal" viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="5" width="14" height="12"/><path d="M3 9h14M7 2v5m6-5v5"/></svg></button>
     <button class="booking-bar-submit" data-open-booking data-cta="sticky">空室・料金を確認 <span aria-hidden="true">↗</span></button>
   </aside>
 
@@ -173,6 +173,7 @@
     <div class="selected-dates"><button id="select-start"><span>CHECK IN</span><strong id="selected-start">日付を選択</strong></button><span class="date-divider" aria-hidden="true">→</span><button id="select-end"><span>CHECK OUT</span><strong id="selected-end">日付を選択</strong></button></div>
     <div class="calendar-heading"><button class="calendar-nav" id="previous-month" aria-label="前の月">←</button><h3 id="calendar-month" aria-live="polite"></h3><button class="calendar-nav" id="next-month" aria-label="次の月">→</button></div>
     <div class="calendar-week" aria-hidden="true"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div><div class="calendar-grid" id="calendar-grid" role="group" aria-labelledby="calendar-month"></div>
+    <p class="calendar-price-note" id="calendar-price-note" hidden>料金は1名あたり・最大10名でご利用時の1泊最低料金の目安です。</p>
     <p id="calendar-status" class="calendar-status" aria-live="polite">チェックイン日を選択してください。</p>
     <a class="dark-button booking-link" id="dated-booking" href="https://redirect-tracker-eta.vercel.app/api/redirect?p=ao&amp;s=direct&amp;cta=sticky" aria-disabled="true">日程を選択してください <span aria-hidden="true">↗</span></a>
     <a class="undated-link booking-link" id="undated-booking" href="https://redirect-tracker-eta.vercel.app/api/redirect?p=ao&amp;s=direct&amp;cta=sticky">日付を決めずに空室を見る <span aria-hidden="true">↗</span></a>

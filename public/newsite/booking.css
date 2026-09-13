@@ -57,3 +57,12 @@ dialog{padding:0;border:0;color:var(--ink);background:var(--paper)}dialog::backd
 .booking-dialog .booking-intro,.booking-dialog .selected-dates{display:none}
 .booking-dialog{padding-top:8px}
 .booking-dialog .close-button{margin-right:-14px}
+
+/* カレンダーの日付セルに1名あたり料金を表示 */
+.day{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:48px}
+.day .day-num{font-size:13px;line-height:1}
+.day .day-price{font-size:8.5px;line-height:1;letter-spacing:0;font-weight:400;font-variant-numeric:lining-nums;white-space:nowrap}
+.day:disabled .day-price{display:none}
+.day.is-today:after{bottom:2px}
+.calendar-price-note{font-size:10px;line-height:1.7;margin-top:10px;color:#1d1b1b}
+@media(max-width:767px){.day{height:46px}.day .day-price{font-size:8px}}
