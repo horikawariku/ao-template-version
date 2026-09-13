@@ -34,25 +34,25 @@
    <img class="hero-slide" src="assets/hero.webp" alt="田園風景に囲まれたサウナヴィラ碧の外観" width="1536" height="1024" decoding="async">
    <img class="hero-slide" src="assets/winter.webp" alt="夕空の下に灯りがともる古民家" width="1537" height="1023" decoding="async">
   </div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="hero-copy">
+   <h1 class="hero-wordmark">VILLA AO<span class="sr-only"> — サウナヴィラ 碧</span></h1>
+   <p class="hero-name">サウナヴィラ -碧-</p>
+   <p class="hero-lead">滋賀・高島の田園にたたずむ、一日一組の貸切ヴィラ。<br>映像と音を楽しむプライベートサウナと、水風呂、外気浴。<br>古民家一棟・約200㎡を、最大10名で。</p>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span>SCROLL</span><i></i></div>
   <button class="hero-prev slide-arrow" aria-label="前の写真"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 4-6 6 6 6"/></svg></button>
   <button class="hero-next slide-arrow" aria-label="次の写真"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 4 6 6-6 6"/></svg></button>
   <span id="slide-number" class="sr-only">01</span>
   <button class="slide-pause" aria-label="写真の自動切り替えを停止" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button>
  </section>
- <div class="scroll-cue" aria-hidden="true"><span>SCROLL</span><i></i></div>
  <section class="intro">
-  <h1 class="intro-wordmark">VILLA AO<span class="sr-only"> — サウナヴィラ 碧</span></h1>
-  <p class="intro-label">サウナヴィラ -碧-</p>
-  <div class="intro-copy">
-   <p>滋賀・高島の田園風景に囲まれた、一日一組の貸切ヴィラ。<br class="desktop-br">古民家のぬくもりのなかで、自分たちだけのサウナと過ごす時間を。</p>
-   <p>好きな映像を観ながらロウリュを楽しみ、水風呂から外気浴へ。<br class="desktop-br">食卓を囲んだり、庭でバーベキューをしたり。約200㎡の空間を<br class="desktop-br">最大10名で貸し切って、家族や友人と、思い思いの一日をお過ごしください。</p>
-  </div>
   <div class="intro-booking" role="group" aria-label="宿泊日を選んで空室を確認">
    <button class="intro-date-field" data-open-booking data-cta="intro">
     <span class="intro-date-copy"><span class="bar-label">CHECK IN — CHECK OUT</span><span id="intro-date-text">ご希望の日程を選択</span></span>
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="5" width="14" height="12"/><path d="M3 9h14M7 2v5m6-5v5"/></svg>
    </button>
-   <button class="booking-bar-submit intro-booking-submit" data-open-booking data-cta="intro">空室・料金を確認 <span aria-hidden="true">↗</span></button>
+   <button class="booking-bar-submit intro-booking-submit" data-open-booking data-cta="intro">予約する</button>
   </div>
  </section>
  <section class="pricing-section" id="pricing" aria-labelledby="pricing-title">
@@ -133,9 +133,8 @@
  <div class="footer-inner"><a class="footer-wordmark" href="#" aria-label="サウナヴィラ碧 トップ">VILLA AO</a><nav class="footer-column" aria-label="施設のご案内"><a href="#sauna">PRIVATE SAUNA</a><a href="#stay">THE HOUSE</a><a href="#garden">BBQ GARDEN</a><a href="gallery/" data-keep-attribution>GALLERY</a></nav><nav class="footer-column" aria-label="滞在のご案内"><a href="#pricing">RATES</a><a href="#information">INFORMATION</a><a href="#nearby">NEARBY</a><a href="#faq">FAQ</a><a href="#access">ACCESS</a><button data-open-booking data-cta="footer">RESERVATION</button></nav><div class="footer-column"><a href="mailto:info@ao-villa.com">CONTACT</a><a href="https://www.instagram.com/ao_villa/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a><small>© SAUNA PRIVATE VILLA AO</small></div></div>
 </footer>
   <aside class="booking-bar" aria-label="宿泊日を選択して空室を確認">
-    <div class="booking-bar-brand"><span>STAY AT AO</span><small>一日一組のプライベートヴィラ</small></div>
-    <button class="bar-dates" data-open-booking data-cta="sticky"><span class="bar-dates-copy"><span class="bar-label">CHECK IN — CHECK OUT</span><span id="bar-date-text">ご希望の日程を選択</span></span><svg class="bar-cal" viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="5" width="14" height="12"/><path d="M3 9h14M7 2v5m6-5v5"/></svg></button>
-    <button class="booking-bar-submit" data-open-booking data-cta="sticky">空室・料金を確認 <span aria-hidden="true">↗</span></button>
+    <div class="bar-price"><b id="bar-price-num">¥9,800</b><span class="bar-price-unit">〜/人</span><span class="bar-price-note">一日一組 ・ 一棟貸切</span></div>
+    <button class="bar-book" data-open-booking data-cta="sticky"><small>BOOK NOW</small>予約</button>
   </aside>
 
   <dialog class="menu-dialog" id="menu-dialog" aria-labelledby="menu-title"><div class="menu-inner"><div class="dialog-top"><span id="menu-title" class="eyebrow">SAUNA PRIVATE VILLA AO</span><button class="close-button" data-close-dialog aria-label="メニューを閉じる">×</button></div><nav class="menu-nav" aria-label="メインメニュー"><a href="#sauna"><span>01</span>Sauna<small>サウナ</small></a><a href="#stay"><span>02</span>The House<small>古民家</small></a><a href="gallery/" data-keep-attribution><span>03</span>Gallery<small>ギャラリー</small></a><a href="#information"><span>04</span>Information<small>滞在について</small></a><a href="#nearby"><span>05</span>Nearby<small>近隣施設</small></a><a href="#faq"><span>06</span>FAQ<small>よくあるご質問</small></a><a href="#access"><span>07</span>Access<small>アクセス</small></a><a href="#pricing"><span>08</span>Rates<small>宿泊料金</small></a></nav><button class="dark-button" data-open-booking data-cta="menu">空室・料金を確認 ↗</button><p class="menu-bottom">TAKASHIMA, SHIGA — JAPAN</p></div></dialog>

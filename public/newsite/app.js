@@ -166,10 +166,28 @@ fetch(RATES_URL)
     if (data && data.per_night && Object.keys(data.per_night).length) {
       perNight = data.per_night;
       $('#calendar-price-note')?.removeAttribute('hidden');
+      const priceNum = $('#bar-price-num');
+      if (priceNum) {
+        const min = Math.min(...Object.values(perNight));
+        const pp = Math.floor(min / PRICE_DIVISOR / 100) * 100;
+        priceNum.textContent = `¥${pp.toLocaleString('ja-JP')}`;
+      }
       renderCalendar();
     }
   })
   .catch(() => { /* 価格が取れなくても予約動線は通常どおり */ });
+
+// 固定バー: FV(1画面目)では隠し、スクロールで表示 (heroが無いページでは常時表示)
+const bookingBar = $('.booking-bar');
+if (bookingBar) {
+  if ($('.hero')) {
+    const toggleBar = () => bookingBar.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.55);
+    addEventListener('scroll', toggleBar, {passive: true});
+    toggleBar();
+  } else {
+    bookingBar.classList.add('is-visible');
+  }
+}
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 if ($('.hero')) {
@@ -193,6 +211,16 @@ $('.hero-next').addEventListener('click', () => { showSlide(slide + 1); userPaus
 $('.slide-pause').addEventListener('click', () => { userPaused = !userPaused; updatePauseButton(); });
 $('.hero').addEventListener('mouseenter', () => { heroHovered = true; });
 $('.hero').addEventListener('mouseleave', () => { heroHovered = false; });
+// 横スワイプで画像を切り替え (縦スクロールは通常どおり)
+let swipeX = null;
+const heroSlides = $('.hero-slides');
+heroSlides.addEventListener('pointerdown', e => { swipeX = e.clientX; });
+heroSlides.addEventListener('pointerup', e => {
+  if (swipeX === null) return;
+  const dx = e.clientX - swipeX; swipeX = null;
+  if (Math.abs(dx) > 45) { showSlide(slide + (dx < 0 ? 1 : -1)); userPaused = true; updatePauseButton(); }
+});
+heroSlides.addEventListener('pointercancel', () => { swipeX = null; });
 setInterval(() => {
   if (!userPaused && !heroHovered && !reducedMotion.matches && !document.hidden && !$('.hero').contains(document.activeElement) && !$('dialog[open]')) showSlide(slide + 1);
 }, 6500);
