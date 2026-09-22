@@ -13,11 +13,11 @@ let attribution = {};
 const RATES_URL = 'https://redirect-tracker-eta.vercel.app/api/rates/ao';
 const PRICE_DIVISOR = 10; // 1名あたり = 1棟料金 ÷ 最大10名 (RATESセクションの「1名あたりの料金目安」と同じ換算)
 let perNight = {};
-// カレンダーには1棟・1泊の実額を表示する (「1人あたり」表記はAirhost到達後の総額ギャップで離脱を生むため廃止 2026-09-22)
-const perNightLabel = key => {
+const perPersonLabel = key => {
   const total = perNight[key];
   if (!total) return '';
-  return `¥${(Math.floor(total / 1000) / 10).toFixed(1).replace(/\.0$/, '')}万`;
+  const pp = Math.round(total / PRICE_DIVISOR / 100) * 100; // 100円単位に四捨五入 (RATESセクションの¥9,800〜表記と同じ丸め)
+  return pp >= 10000 ? `¥${String(Math.floor(pp / 1000) / 10).replace(/\.0$/, '')}万〜` : `¥${pp.toLocaleString('ja-JP')}〜`;
 };
 
 // Same source propagation and 30-day first-party cookie as the original AO site.
@@ -118,7 +118,7 @@ function renderCalendar() {
     num.className = 'day-num'; num.textContent = date;
     button.append(num);
     button.disabled = key < todayKey;
-    const priceLabel = button.disabled ? '' : perNightLabel(key);
+    const priceLabel = button.disabled ? '' : perPersonLabel(key);
     if (priceLabel) {
       const price = document.createElement('small');
       price.className = 'day-price'; price.textContent = priceLabel;
@@ -169,10 +169,8 @@ fetch(RATES_URL)
       const priceNum = $('#bar-price-num');
       if (priceNum) {
         const min = Math.min(...Object.values(perNight));
-        priceNum.textContent = `¥${min.toLocaleString('ja-JP')}`;
         const pp = Math.round(min / PRICE_DIVISOR / 100) * 100;
-        const note = $('#bar-price-note');
-        if (note) note.textContent = `一日一組・最大10名（10名で ¥${pp.toLocaleString('ja-JP')}/人）`;
+        priceNum.textContent = `¥${pp.toLocaleString('ja-JP')}`;
       }
       renderCalendar();
     }
